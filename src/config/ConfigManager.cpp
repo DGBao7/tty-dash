@@ -251,7 +251,7 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
     }
 
     const int schema_version = _integer(root , QStringLiteral("schema_version") , 1);
-    config.schema_version = 3;
+    config.schema_version = 5;
     config.extra = _without_keys(root , {QStringLiteral("schema_version") , QStringLiteral("application") , QStringLiteral("effects") , QStringLiteral("displays") , QStringLiteral("terbon")});
 
     const QJsonObject application = root.value(QStringLiteral("application")).toObject();
@@ -271,7 +271,7 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
     config.effects.extra = _without_keys(effects , {QStringLiteral("blur") , QStringLiteral("backdrop") , QStringLiteral("background_color")});
 
     const QJsonObject terminal = root.value(QStringLiteral("terbon")).toObject();
-    config.terbon.extra = _without_keys(terminal , {QStringLiteral("enabled") , QStringLiteral("visible_on_startup") , QStringLiteral("monitor") , QStringLiteral("position") , QStringLiteral("width") , QStringLiteral("height") , QStringLiteral("remember_geometry") , QStringLiteral("has_saved_geometry") , QStringLiteral("x") , QStringLiteral("y")});
+    config.terbon.extra = _without_keys(terminal , {QStringLiteral("enabled") , QStringLiteral("visible_on_startup") , QStringLiteral("monitor") , QStringLiteral("position") , QStringLiteral("width") , QStringLiteral("height") , QStringLiteral("initial_working_directory") , QStringLiteral("remember_geometry") , QStringLiteral("has_saved_geometry") , QStringLiteral("x") , QStringLiteral("y")});
     config.terbon.enabled = terminal.value(QStringLiteral("enabled")).toBool(true);
     config.terbon.visible_on_startup = terminal.value(QStringLiteral("visible_on_startup")).toBool(true);
     config.terbon.monitor = terminal.value(QStringLiteral("monitor")).toString(QStringLiteral("primary")).trimmed();
@@ -279,7 +279,9 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
     config.terbon.position = terminal.value(QStringLiteral("position")).toString(QStringLiteral("right")).toLower();
     if (config.terbon.position != QStringLiteral("right") && config.terbon.position != QStringLiteral("custom")) config.terbon.position = QStringLiteral("right");
     config.terbon.width = std::clamp(_integer(terminal , QStringLiteral("width") , 700) , 420 , 4000);
-    config.terbon.height = std::clamp(_integer(terminal , QStringLiteral("height") , 420) , 260 , 3000);
+    config.terbon.height = std::clamp(_integer(terminal , QStringLiteral("height") , 350) , 260 , 3000);
+    config.terbon.initial_working_directory = terminal.value(QStringLiteral("initial_working_directory")).toString(QStringLiteral("D:/")).trimmed();
+    if (config.terbon.initial_working_directory.isEmpty()) config.terbon.initial_working_directory = QStringLiteral("D:/");
     config.terbon.remember_geometry = terminal.value(QStringLiteral("remember_geometry")).toBool(true);
     config.terbon.has_saved_geometry = terminal.value(QStringLiteral("has_saved_geometry")).toBool(terminal.contains(QStringLiteral("x")) && terminal.contains(QStringLiteral("y")));
     config.terbon.x = _integer(terminal , QStringLiteral("x") , 0);
@@ -405,6 +407,10 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
         }
     }
 
+    if (schema_version < 5 && config.terbon.width == 700 && config.terbon.height == 420) {
+        config.terbon.height = 350;
+    }
+
     return true;
 }
 
@@ -475,7 +481,7 @@ QByteArray ConfigManager::_serialize() const {
     }
 
     QJsonObject root = _config.extra;
-    root.insert(QStringLiteral("schema_version") , 3);
+    root.insert(QStringLiteral("schema_version") , 5);
     root.insert(QStringLiteral("application") , application);
     root.insert(QStringLiteral("effects") , effects);
     root.insert(QStringLiteral("displays") , displays);
@@ -487,6 +493,7 @@ QByteArray ConfigManager::_serialize() const {
     terbon.insert(QStringLiteral("position") , terminal.position);
     terbon.insert(QStringLiteral("width") , terminal.width);
     terbon.insert(QStringLiteral("height") , terminal.height);
+    terbon.insert(QStringLiteral("initial_working_directory") , terminal.initial_working_directory);
     terbon.insert(QStringLiteral("remember_geometry") , terminal.remember_geometry);
     terbon.insert(QStringLiteral("has_saved_geometry") , terminal.has_saved_geometry);
     if (terminal.has_saved_geometry || terminal.position == QStringLiteral("custom")) {

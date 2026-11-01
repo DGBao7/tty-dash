@@ -5,13 +5,14 @@
 #include "terbon/TerBonWindow.h"
 #include "terbon/pas/Command.h"
 #include "terbon/str/AnalizeStr.h"
+#include "terbon/str/AnalyzePath.h"
 #include "terbon/ui/StatusBar.h"
 #include "terbon/ui/TerminalWidget.h"
 
 #include <QScreen>
 #include <QWindow>
-
-#include <algorithm>
+#include <QDir>
+#include <QCoreApplication>
 
 namespace terbon {
 
@@ -20,20 +21,52 @@ TerBonController::TerBonController(const ttydash::TerBonSettings &settings , tty
     , _settings(settings)
     , _display_manager(display_manager)
     , _layout_manager(layout_manager)
-    , _config_manager(config_manager)
-    , _window(new TerBonWindow()) {
-    _geometry_save_timer.setSingleShot(true);
-    _geometry_save_timer.setInterval(450);
-    connect(&_geometry_save_timer , &QTimer::timeout , this , [this]() { _save_geometry(); });
-    connect(_window , &TerBonWindow::geometry_changed , this , [this](const QRect &) {
-        if (_settings.remember_geometry) _geometry_save_timer.start();
-    });
+    , _config_manager(config_manager) {
+    QString startup_warning;
+    QString error;
+    const QString initial_directory = _settings.initial_working_directory.trimmed().isEmpty()
+        ? QStringLiteral("D:/")
+        : _settings.initial_working_directory.trimmed();
+    if (!Path::setWorkingDirectory(initial_directory , &error)) {
+        QString fallback = QDir::homePath();
+        QString fallback_error;
+        bool fallback_ready = Path::setWorkingDirectory(fallback , &fallback_error);
+        if (!fallback_ready) {
+            fallback = QCoreApplication::applicationDirPath();
+            fallback_ready = Path::setWorkingDirectory(fallback , &fallback_error);
+        }
+        if (!fallback_ready) {
+            fallback = QDir::currentPath();
+            fallback = QDir::toNativeSeparators(QDir::cleanPath(fallback));
+            if (!fallback.endsWith(QDir::separator())) fallback.append(QDir::separator());
+            Path::path = fallback.toStdString();
+        }
+        startup_warning = QStringLiteral("Warning: initial working directory '%1' is unavailable (%2). Using '%3'.")
+            .arg(initial_directory , error , QString::fromStdString(Path::path));
+    }
+
+    _window = new TerBonWindow();
     connect(_window , &TerBonWindow::closed_by_user , this , [this]() {
         _set_visible(false , true);
+    });
+    connect(_window , &TerBonWindow::geometry_changed , this , [this](const QRect &geometry) {
+        if (!_settings.remember_geometry) return;
+        _settings.position = QStringLiteral("custom");
+        _settings.has_saved_geometry = true;
+        _settings.x = geometry.x();
+        _settings.y = geometry.y();
+        _settings.width = geometry.width();
+        _settings.height = geometry.height();
+        _config_manager._update_terbon_settings(_settings);
     });
     connect(_window->_terminal() , &TerminalWidget::CommandEntered , this , [this](const QString &command) {
         _handle_command(command);
     });
+    if (!startup_warning.isEmpty()) {
+        _window->_terminal()->ClearTerminal();
+        _window->_terminal()->Print(startup_warning);
+        _window->_terminal()->NewPrompt();
+    }
     _position_window();
     if (_settings.enabled && _settings.visible_on_startup) _set_visible(true , false);
 }
@@ -81,8 +114,6 @@ void TerBonController::_set_visible(bool visible , bool persist_startup) {
         _window->activateWindow();
         _window->_terminal()->setFocus(Qt::OtherFocusReason);
     } else {
-        _geometry_save_timer.stop();
-        if (_settings.remember_geometry) _save_geometry();
         _window->hide();
     }
 }
@@ -94,21 +125,7 @@ void TerBonController::_position_window() {
     if (!screen) return;
     _window->winId();
     if (_window->windowHandle() && _window->windowHandle()->screen() != screen) _window->windowHandle()->setScreen(screen);
-    const QRect available = screen->availableGeometry();
-    _window->setMinimumSize(std::min(320 , std::max(1 , available.width() - 32)) , std::min(220 , std::max(1 , available.height() - 32)));
-    _window->setGeometry(_layout_manager._terbon_geometry(_settings , available));
-}
-
-void TerBonController::_save_geometry() {
-    if (!_window || !_settings.remember_geometry) return;
-    const QRect geometry = _window->geometry();
-    _settings.has_saved_geometry = true;
-    _settings.position = QStringLiteral("custom");
-    _settings.x = geometry.x();
-    _settings.y = geometry.y();
-    _settings.width = geometry.width();
-    _settings.height = geometry.height();
-    _config_manager._update_terbon_settings(_settings);
+    _window->_set_fixed_geometry(_layout_manager._terbon_geometry(_settings , screen->availableGeometry()));
 }
 
 void TerBonController::_handle_command(const QString &command) {

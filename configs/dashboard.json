@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 5,
   "application": {
     "always_on_top": false,
     "click_through": true,
@@ -17,7 +17,8 @@
     "monitor": "primary",
     "position": "right",
     "width": 700,
-    "height": 420,
+    "height": 350,
+    "initial_working_directory": "D:/",
     "remember_geometry": true,
     "has_saved_geometry": false
   },

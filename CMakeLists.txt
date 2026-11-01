@@ -118,4 +118,5 @@ endif()
 
 set_target_properties(TtyDashboard PROPERTIES
     OUTPUT_NAME tty-dashboard
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
 )

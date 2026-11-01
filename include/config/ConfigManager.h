@@ -59,7 +59,8 @@ struct TerBonSettings {
     QString monitor = QStringLiteral("primary");
     QString position = QStringLiteral("right");
     int width = 700;
-    int height = 420;
+    int height = 350;
+    QString initial_working_directory = QStringLiteral("D:/");
     bool remember_geometry = true;
     bool has_saved_geometry = false;
     int x = 0;
@@ -68,7 +69,7 @@ struct TerBonSettings {
 };
 
 struct DashboardConfig {
-    int schema_version = 3;
+    int schema_version = 5;
     ApplicationSettings application;
     EffectsSettings effects;
     TerBonSettings terbon;

@@ -2,9 +2,13 @@
 #include <string>
 #include <filesystem>
 #include <algorithm>
+#include <QDir>
+#include <QFileInfo>
+#include <QStringList>
 
 #include "ui/TerminalWidget.h"
 #include "pas/Sys.h"
+#include "str/AnalyzePath.h"
 
 namespace terbon {
 
@@ -15,38 +19,26 @@ std::vector<std::string> findSources(
     std::string path)
 {
     std::vector<std::string> result;
+    const QString current_directory = QString::fromStdString(path);
 
-    for (const std::string& source : sources)
-    {
-        size_t slash = source.find_last_of("/\\");
+    for (const std::string &source : sources) {
+        const QString pattern = QDir::fromNativeSeparators(QString::fromStdString(source));
+        const qsizetype separator = pattern.lastIndexOf(QLatin1Char('/'));
+        const QString folder = separator < 0 ? QStringLiteral(".") : pattern.left(separator);
+        const QString file_pattern = separator < 0 ? pattern : pattern.mid(separator + 1);
+        const bool drive_qualified = folder.size() >= 2 && folder.at(1) == QLatin1Char(':');
+        const QString resolved_folder = QDir::isAbsolutePath(folder) || drive_qualified
+            ? Path::resolve(folder)
+            : QDir::cleanPath(QDir(current_directory).absoluteFilePath(folder));
+        const QDir directory(resolved_folder);
+        const QFileInfoList matches = directory.entryInfoList(
+            QStringList{file_pattern} ,
+            QDir::Files | QDir::NoDotAndDotDot ,
+            QDir::Name
+        );
 
-        std::string folder = source.substr(0 , slash);
-        std::string name = source.substr(slash + 1);
-
-        size_t star = name.find("*");
-
-        std::string before = name.substr(0 , star);
-        std::string after = name.substr(star + 1);
-
-        std::string full_folder = path + folder;
-
-        for (const auto& entry : std::filesystem::directory_iterator(full_folder))
-        {
-            if (!entry.is_regular_file())
-            {
-                continue;
-            }
-
-            std::string filename = entry.path().filename().string();
-
-            if (
-                filename.size() >= before.size() + after.size() &&
-                filename.substr(0 , before.size()) == before &&
-                filename.substr(filename.size() - after.size()) == after
-            )
-            {
-                result.push_back(folder + "/" + filename);
-            }
+        for (const QFileInfo &match : matches) {
+            result.push_back(QDir::toNativeSeparators(match.absoluteFilePath()).toStdString());
         }
     }
 

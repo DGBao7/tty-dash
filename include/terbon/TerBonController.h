@@ -3,7 +3,6 @@
 #include "config/ConfigManager.h"
 
 #include <QObject>
-#include <QTimer>
 #include <vector>
 
 namespace ttydash {
@@ -31,7 +30,6 @@ public:
 private:
     void _set_visible(bool visible , bool persist_startup);
     void _position_window();
-    void _save_geometry();
     void _handle_command(const QString &command);
 
     ttydash::TerBonSettings _settings;
@@ -39,7 +37,6 @@ private:
     ttydash::LayoutManager &_layout_manager;
     ttydash::ConfigManager &_config_manager;
     TerBonWindow *_window = nullptr;
-    QTimer _geometry_save_timer;
     std::vector<std::string> _pending_command;
 };
 

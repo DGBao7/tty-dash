@@ -72,13 +72,13 @@ void exeOpe(const std::string &target , const std::string &stuff , TerminalWidge
     }
     else if (target == "fil")
     {
-        const QString path = QDir(QString::fromStdString(Path::path)).filePath(QString::fromStdString(stuff));
+        const QString path = Path::resolve(QString::fromStdString(stuff));
         const QFileInfo info(path);
         opened = info.isFile() && QDesktopServices::openUrl(QUrl::fromLocalFile(info.absoluteFilePath()));
     }
     else if (target == "fol")
     {
-        const QString path = QDir(QString::fromStdString(Path::path)).filePath(QString::fromStdString(stuff));
+        const QString path = Path::resolve(QString::fromStdString(stuff));
         const QFileInfo info(path);
         opened = info.isDir() && QDesktopServices::openUrl(QUrl::fromLocalFile(info.absoluteFilePath()));
     }
@@ -89,21 +89,17 @@ void exeCre(std::string target ,
             std::vector<std::string> split_command
         )
 {
-    std::string path = Path::path;
-    std::string name = split_command[2];
+    const QString destination = Path::resolve(QString::fromStdString(split_command[2]));
 
     if (target == "fil")
     {
-        std::ofstream file(path + name);
-        file.close();
+        QFile file(destination);
+        if (file.open(QIODevice::WriteOnly)) file.close();
     }
 
     else if (target == "fol")
     {
-        CreateDirectoryA(
-            (path + name).c_str(),
-            NULL
-        );
+        QDir().mkdir(destination);
     }
 }
 
@@ -111,16 +107,15 @@ void exeDel(std::string target ,
             std::vector<std::string> split_command
         )
 {
-    std::string path = Path::path;
-    std::string stuff = path + split_command[2];
+    const QString target_path = Path::resolve(QString::fromStdString(split_command[2]));
 
     if (target == "fil")
     {
-        std::remove(stuff.c_str());
+        QFile::remove(target_path);
     }
     else if (target == "fol")
     {
-        RemoveDirectoryA(stuff.c_str());
+        QDir().rmdir(target_path);
     }
 }
 
@@ -203,8 +198,8 @@ void exeRun(std::string target ,
             "      ● Running"
         );
     
-    std::string path = Path::path;
-    std::string file = path + split_command[2];
+    const QString working_directory = QString::fromStdString(Path::path);
+    const std::string file = Path::resolve(QString::fromStdString(split_command[2])).toStdString();
 
     if (target == "cpp")
     {
@@ -214,9 +209,7 @@ void exeRun(std::string target ,
 
         compile->setProgram("g++");
 
-        compile -> setWorkingDirectory(
-            QString::fromStdString(Path::path)
-        );
+        compile->setWorkingDirectory(working_directory);
 
         compile->setArguments(
             {
@@ -247,7 +240,7 @@ void exeRun(std::string target ,
         QObject::connect(
             compile ,
             QOverload<int , QProcess::ExitStatus>::of(&QProcess::finished) ,
-            [compile , terminal , exe , status_bar]()
+            [compile , terminal , exe , status_bar , working_directory]()
             {
                 if (compile->exitCode() != 0)
                 {
@@ -267,6 +260,7 @@ void exeRun(std::string target ,
                 run->setProgram(
                     QString::fromStdString(exe)
                 );
+                run->setWorkingDirectory(working_directory);
 
                 run->setProcessChannelMode(QProcess::MergedChannels);
 
@@ -533,34 +527,30 @@ void exeBui(std::string target ,
 {
     status_bar -> UpdateStatus("● Building");
 
-    std::string path = Path::path;
+    const QString working_directory = QString::fromStdString(Path::path);
 
-    std::string main_source = split_command[2];
+    const QString main_source = Path::resolve(QString::fromStdString(split_command[2]));
 
     std::vector<std::string> source_patterns = buildSources(split_command);
 
     std::vector<std::string> found_sources = findSources(
         source_patterns ,
-        path
+        working_directory.toStdString()
     );
 
     QStringList arguments;
 
-    arguments << QString::fromStdString(
-        path + main_source
-    );
+    arguments << main_source;
 
     for (const std::string& source : found_sources)
     {
-        arguments << QString::fromStdString(
-            path + source
-        );
+        arguments << QString::fromStdString(source);
     }
 
     if (target != "cpp") return;
-    arguments << "-o" << QString::fromStdString(path + "a.exe");
+    arguments << "-o" << QDir(working_directory).filePath(QStringLiteral("a.exe"));
     status_bar->UpdateStatus(QStringLiteral("● Building"));
-    _run_tool_process(QStringLiteral("g++") , arguments , QString::fromStdString(path) , terminal , status_bar , QStringLiteral("Cannot start g++") , [terminal](bool succeeded) {
+    _run_tool_process(QStringLiteral("g++") , arguments , working_directory , terminal , status_bar , QStringLiteral("Cannot start g++") , [terminal](bool succeeded) {
         terminal->Print(succeeded ? QStringLiteral("Build successful") : QStringLiteral("Build failed due to g++ error or various purposes"));
     });
 }
@@ -572,8 +562,7 @@ void exeAna(std::string target ,
 {
     if (target == "fil")
     {
-        std::string path = Path::path;
-        std::string file = path + split_command[2];
+        const std::string file = Path::resolve(QString::fromStdString(split_command[2])).toStdString();
 
         std::ifstream source(file);
 
@@ -655,7 +644,7 @@ void exeFor(std::string target ,
         )
 {
     const QString base = QString::fromStdString(Path::path);
-    const QString file = QDir(base).filePath(QString::fromStdString(split_command[2]));
+    const QString file = Path::resolve(QString::fromStdString(split_command[2]));
     if (!QFileInfo::exists(file)) {
         terminal->Print(QStringLiteral("File not found"));
         return;
@@ -695,22 +684,11 @@ void exeCd(std::vector<std::string> split_command , TerminalWidget* terminal)
         return;
     }
 
-    const QString requested = QString::fromStdString(split_command[1]);
-    const QDir current(QString::fromStdString(Path::path));
-    const QString candidate = QDir::isAbsolutePath(requested)
-        ? QDir::cleanPath(requested)
-        : QDir::cleanPath(current.filePath(requested));
-    const QFileInfo info(candidate);
-    if (!info.exists()) {
-        terminal->Print(QStringLiteral("Path not found"));
-        return;
+    QString error;
+    const QString requested_path = QString::fromStdString(analyzePath(split_command));
+    if (!Path::setWorkingDirectory(requested_path , &error)) {
+        terminal->Print(error);
     }
-    if (!info.isDir()) {
-        terminal->Print(QStringLiteral("Not a directory"));
-        return;
-    }
-    Path::path = QDir::toNativeSeparators(QDir(candidate).absolutePath()).toStdString();
-    if (!Path::path.empty() && Path::path.back() != '\\' && Path::path.back() != '/') Path::path.push_back(QDir::separator().toLatin1());
 }
 
 void exeDir(TerminalWidget* terminal)

@@ -4,8 +4,7 @@
 #include <QRect>
 
 class QCloseEvent;
-class QMoveEvent;
-class QResizeEvent;
+class QShowEvent;
 
 namespace terbon {
 
@@ -20,6 +19,7 @@ public:
 
     TerminalWidget *_terminal() const;
     StatusBar *_status_bar() const;
+    void _set_fixed_geometry(const QRect &geometry);
 
 signals:
     void geometry_changed(const QRect &geometry);
@@ -27,12 +27,16 @@ signals:
 
 protected:
     void closeEvent(QCloseEvent *event) override;
-    void moveEvent(QMoveEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
+    void showEvent(QShowEvent *event) override;
+    bool nativeEvent(const QByteArray &event_type , void *message , qintptr *result) override;
 
 private:
+    void _apply_native_styles();
+
     TerminalWidget *_terminal_widget = nullptr;
     StatusBar *_status = nullptr;
+    QRect _fixed_geometry;
+    bool _applying_geometry = false;
 };
 
 }
