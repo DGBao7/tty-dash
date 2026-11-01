@@ -17,7 +17,9 @@ bool _is_drive_letter(QChar value) {
 
 namespace Path {
 
-std::string path = QStringLiteral("D:/").toStdString();
+std::string path = QDir::toNativeSeparators(
+    QDir::homePath() + QStringLiteral("/")
+).toStdString();
 
 namespace {
 

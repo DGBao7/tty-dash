@@ -1,3 +1,4 @@
+
 #include <vector>
 #include <string>
 #include <fstream>
@@ -34,11 +35,11 @@ void _run_tool_process(const QString &program , const QStringList &arguments , c
     process->setProcessChannelMode(QProcess::MergedChannels);
     terminal->SetRunningProcess(process);
     QObject::connect(process , &QProcess::readyRead , process , [process , terminal]() {
-        const QString output = QString::fromLocal8Bit(process->readAll());
+        const QString output = QString::fromUtf8(process->readAll());
         if (!output.isEmpty()) terminal->Print(output);
     });
     QObject::connect(process , qOverload<int , QProcess::ExitStatus>(&QProcess::finished) , process , [process , terminal , status_bar , finished_callback](int exit_code , QProcess::ExitStatus) {
-        const QString remaining = QString::fromLocal8Bit(process->readAll());
+        const QString remaining = QString::fromUtf8(process->readAll());
         if (!remaining.isEmpty()) terminal->Print(remaining);
         const bool succeeded = exit_code == 0;
         if (finished_callback) finished_callback(succeeded);
@@ -87,7 +88,7 @@ void exeOpe(const std::string &target , const std::string &stuff , TerminalWidge
 
 void exeCre(std::string target ,
             std::vector<std::string> split_command
-        )
+       )
 {
     const QString destination = Path::resolve(QString::fromStdString(split_command[2]));
 
@@ -105,7 +106,7 @@ void exeCre(std::string target ,
 
 void exeDel(std::string target ,
             std::vector<std::string> split_command
-        )
+       )
 {
     const QString target_path = Path::resolve(QString::fromStdString(split_command[2]));
 
@@ -191,13 +192,13 @@ void exeRun(std::string target ,
             std::vector<std::string> split_command ,
             TerminalWidget* terminal ,
             StatusBar* status_bar
-        )
+       )
 {
     status_bar -> UpdateStatus(
             QString::fromStdString(split_command[2]) +
             "      ● Running"
-        );
-    
+       );
+
     const QString working_directory = QString::fromStdString(Path::path);
     const std::string file = Path::resolve(QString::fromStdString(split_command[2])).toStdString();
 
@@ -226,7 +227,7 @@ void exeRun(std::string target ,
             &QProcess::readyRead ,
             [compile , terminal]()
             {
-                QString output = QString::fromLocal8Bit(
+                QString output = QString::fromUtf8(
                     compile->readAll()
                 );
 
@@ -271,7 +272,7 @@ void exeRun(std::string target ,
                     &QProcess::readyRead ,
                     [run , terminal]()
                     {
-                        QString output = QString::fromLocal8Bit(
+                        QString output = QString::fromUtf8(
                             run->readAll()
                         );
 
@@ -354,7 +355,7 @@ void exeRun(std::string target ,
             &QProcess::readyRead ,
             [process , terminal]()
             {
-                QString output = QString::fromLocal8Bit(
+                QString output = QString::fromUtf8(
                     process->readAll()
                 );
 
@@ -420,7 +421,7 @@ void exeRun(std::string target ,
             &QProcess::readyRead ,
             [process , terminal]()
             {
-                QString output = QString::fromLocal8Bit(
+                QString output = QString::fromUtf8(
                     process -> readAll()
                 );
 
@@ -488,7 +489,7 @@ void exeRun(std::string target ,
             &QProcess::readyRead ,
             [process , terminal]()
             {
-                QString output = QString::fromLocal8Bit(
+                QString output = QString::fromUtf8(
                     process->readAll()
                 );
 
@@ -517,13 +518,13 @@ void exeRun(std::string target ,
     }
 }
 
-// 
+//
 
 void exeBui(std::string target ,
             std::vector<std::string> split_command ,
             TerminalWidget* terminal ,
             StatusBar* status_bar
-        )
+       )
 {
     status_bar -> UpdateStatus("● Building");
 
@@ -558,7 +559,7 @@ void exeBui(std::string target ,
 void exeAna(std::string target ,
             std::vector<std::string> split_command ,
             TerminalWidget* terminal
-        )
+       )
 {
     if (target == "fil")
     {
@@ -641,7 +642,7 @@ void exeFor(std::string target ,
             std::vector<std::string> split_command ,
             TerminalWidget* terminal ,
             StatusBar* status_bar
-        )
+       )
 {
     const QString base = QString::fromStdString(Path::path);
     const QString file = Path::resolve(QString::fromStdString(split_command[2]));
@@ -846,8 +847,8 @@ void exeTre(std::vector<std::string> split_command , TerminalWidget* terminal)
 }
 
 void exeHelp(
-    std::vector<std::string> split_command ,
-    TerminalWidget* terminal
+   std::vector<std::string> split_command ,
+   TerminalWidget* terminal
 )
 {
     QFile file(":/configs/commands.json");
@@ -974,9 +975,9 @@ void exeHelp(
 } // namespace
 
 void execute(
-    std::vector<std::string> split_command ,
-    TerminalWidget* terminal ,
-    StatusBar* status_bar
+   std::vector<std::string> split_command ,
+   TerminalWidget* terminal ,
+   StatusBar* status_bar
 )
 {
     if (split_command.empty()) return;
@@ -1061,7 +1062,7 @@ void execute(
     }
     else if (action == "the")
     {
-        
+
     }
 
     return;
