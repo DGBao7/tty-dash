@@ -1,6 +1,8 @@
 #include "app/AppController.h"
 
 #include "utils/Logger.h"
+#include "theme/Theme.h"
+#include "terbon/TerBonController.h"
 #include "window/DashboardWindow.h"
 
 #include <QCoreApplication>
@@ -38,16 +40,14 @@ void AppController::_initialize() {
     QApplication::setOrganizationName(QStringLiteral("TtyDashboard"));
     QApplication::setApplicationVersion(QStringLiteral("0.1.0"));
     _application.setQuitOnLastWindowClosed(false);
-    QFile theme(QStringLiteral(":/themes/Dark.qss"));
-    if (theme.open(QIODevice::ReadOnly)) {
-        _application.setStyleSheet(QString::fromUtf8(theme.readAll()));
-    }
+    _application.setStyleSheet(Theme::_application_stylesheet());
     _config = _config_manager._load();
     _click_through_enabled = _config.application.click_through;
 
     QObject::connect(&_display_manager , &DisplayManager::displays_changed , &_application , [this]() {
         Logger::_info(QStringLiteral("Display configuration changed; restoring dashboards"));
         _rebuild_dashboards();
+        if (_terbon_controller) _terbon_controller->_screen_configuration_changed();
     });
     QObject::connect(&_hotkey_manager , &HotkeyManager::exit_requested , &_application , [this]() {
         _application.quit();
@@ -61,11 +61,15 @@ void AppController::_initialize() {
     QObject::connect(&_hotkey_manager , &HotkeyManager::interaction_toggle_requested , &_application , [this]() {
         _toggle_interaction();
     });
+    QObject::connect(&_hotkey_manager , &HotkeyManager::terbon_visibility_toggle_requested , &_application , [this]() {
+        if (_terbon_controller) _terbon_controller->_toggle_visibility();
+    });
 
     _system_monitor._start(_config.application.monitoring_interval_ms);
     _hotkey_manager._start();
     _create_tray_icon();
     _rebuild_dashboards();
+    _terbon_controller = std::make_unique<terbon::TerBonController>(_config.terbon , _display_manager , _layout_manager , _config_manager , &_application);
     Logger::_info(QStringLiteral("Configuration loaded from %1").arg(_config_manager._path()));
     _initialized = true;
 }
@@ -147,6 +151,7 @@ void AppController::_reload_configuration() {
     _config = _config_manager._load();
     _click_through_enabled = _config.application.click_through;
     _system_monitor._set_interval(_config.application.monitoring_interval_ms);
+    if (_terbon_controller) _terbon_controller->_apply_settings(_config.terbon);
     _rebuild_dashboards();
 }
 
@@ -184,12 +189,14 @@ void AppController::_create_tray_icon() {
     _tray_menu = menu;
     QAction *visibility_action = menu->addAction(QStringLiteral("Hide dashboards"));
     QAction *interaction_action = menu->addAction(QStringLiteral("Enable interaction"));
+    QAction *terbon_action = menu->addAction(QStringLiteral("Show TerBon terminal"));
     QAction *reload_action = menu->addAction(QStringLiteral("Reload configuration"));
     menu->addSeparator();
     QAction *exit_action = menu->addAction(QStringLiteral("Exit"));
-    QObject::connect(menu , &QMenu::aboutToShow , menu , [this , visibility_action , interaction_action]() {
+    QObject::connect(menu , &QMenu::aboutToShow , menu , [this , visibility_action , interaction_action , terbon_action]() {
         visibility_action->setText(_visible ? QStringLiteral("Hide dashboards") : QStringLiteral("Show dashboards"));
         interaction_action->setText(_click_through_enabled ? QStringLiteral("Enable interaction") : QStringLiteral("Disable interaction"));
+        terbon_action->setText(_terbon_controller && _terbon_controller->_visible() ? QStringLiteral("Hide TerBon terminal") : QStringLiteral("Show TerBon terminal"));
     });
 
     QObject::connect(visibility_action , &QAction::triggered , &_application , [this , visibility_action]() {
@@ -199,6 +206,9 @@ void AppController::_create_tray_icon() {
     QObject::connect(interaction_action , &QAction::triggered , &_application , [this , interaction_action]() {
         _toggle_interaction();
         interaction_action->setText(_click_through_enabled ? QStringLiteral("Enable interaction") : QStringLiteral("Disable interaction"));
+    });
+    QObject::connect(terbon_action , &QAction::triggered , &_application , [this]() {
+        if (_terbon_controller) _terbon_controller->_toggle_visibility();
     });
     QObject::connect(reload_action , &QAction::triggered , &_application , [this]() {
         _reload_configuration();
@@ -217,13 +227,14 @@ void AppController::_create_tray_icon() {
     });
     _tray_icon->show();
 
-    if (_hotkey_manager._registered_count() < 4) {
+    if (_hotkey_manager._registered_count() < 5) {
         Logger::_warning(QStringLiteral("One or more global shortcuts were unavailable; use the system tray menu for controls"));
     }
 }
 
 void AppController::_stop() {
     _hotkey_manager._stop();
+    _terbon_controller.reset();
     qDeleteAll(_windows);
     _windows.clear();
     if (_tray_icon) {

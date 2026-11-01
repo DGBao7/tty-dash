@@ -9,6 +9,7 @@
 
 #include <QApplication>
 #include <QVector>
+#include <memory>
 
 class QSystemTrayIcon;
 class QMenu;
@@ -16,6 +17,11 @@ class QMenu;
 namespace ttydash {
 
 class DashboardWindow;
+}
+
+namespace terbon { class TerBonController; }
+
+namespace ttydash {
 
 class AppController {
 public:
@@ -40,6 +46,7 @@ private:
     SystemMonitor _system_monitor;
     WidgetManager _widget_manager;
     HotkeyManager _hotkey_manager;
+    std::unique_ptr<terbon::TerBonController> _terbon_controller;
     DashboardConfig _config;
     QVector<DashboardWindow *> _windows;
     QSystemTrayIcon *_tray_icon = nullptr;

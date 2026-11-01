@@ -6,7 +6,6 @@
 #include "widgets/WidgetManager.h"
 #include "services/SystemMonitor.h"
 
-#include <QPainter>
 #include <QScreen>
 #include <QShowEvent>
 
@@ -24,8 +23,7 @@ DashboardWindow::DashboardWindow(const DisplayConfig &display_config , const Das
     , _application_settings(application_config.application)
     , _effects_settings(application_config.effects)
     , _display_name(display_config.name)
-    , _click_through_enabled(application_config.application.click_through)
-    , _background_color(_effective_background_color()) {
+    , _click_through_enabled(application_config.application.click_through) {
     setWindowTitle(QStringLiteral("TTY Dashboard"));
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_NoSystemBackground);
@@ -38,7 +36,7 @@ DashboardWindow::DashboardWindow(const DisplayConfig &display_config , const Das
     }
 
     _apply_widget_layout(layout_manager , widget_manager , system_monitor);
-    setWindowOpacity(_effective_opacity());
+    setWindowOpacity(1.0);
     winId();
     _apply_native_styles();
 }
@@ -67,16 +65,6 @@ void DashboardWindow::_set_click_through(bool enabled) {
 
 bool DashboardWindow::_click_through() const {
     return _click_through_enabled;
-}
-
-void DashboardWindow::paintEvent(QPaintEvent *event) {
-    Q_UNUSED(event)
-    if (!_click_through_enabled || _native_backdrop_applied || !_background_color.isValid() || _background_color.alpha() == 0) {
-        return;
-    }
-
-    QPainter painter(this);
-    painter.fillRect(rect() , _background_color);
 }
 
 void DashboardWindow::showEvent(QShowEvent *event) {
@@ -121,12 +109,11 @@ void DashboardWindow::_apply_native_styles() {
 
     const HWND z_order = _application_settings.always_on_top ? HWND_TOPMOST : HWND_NOTOPMOST;
     SetWindowPos(hwnd , z_order , 0 , 0 , 0 , 0 , SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE | SWP_FRAMECHANGED | SWP_NOOWNERZORDER);
-    if (_click_through_enabled) {
-        _native_backdrop_applied = _window_effects._apply(hwnd , _effects_settings , _display_config.backdrop , _display_config.background_color);
-    } else {
-        _window_effects._clear(hwnd);
-        _native_backdrop_applied = false;
-    }
+    _window_effects._clear(hwnd);
+    const QString backdrop = _display_config.backdrop.isEmpty() ? _effects_settings.backdrop : _display_config.backdrop;
+    _native_backdrop_applied = _effects_settings.blur && backdrop != QStringLiteral("none")
+        ? _window_effects._apply(hwnd , _effects_settings , _display_config.backdrop , _display_config.background_color)
+        : false;
 #else
     _native_backdrop_applied = false;
 #endif
@@ -148,19 +135,6 @@ void DashboardWindow::_apply_widget_layout(LayoutManager &layout_manager , Widge
         });
         widget->show();
     }
-}
-
-QColor DashboardWindow::_effective_background_color() const {
-    const QString value = _display_config.background_color.isEmpty()
-        ? _effects_settings.background_color
-        : _display_config.background_color;
-    const QColor color(value);
-
-    return color.isValid() ? color : QColor(QStringLiteral("#66071016"));
-}
-
-qreal DashboardWindow::_effective_opacity() const {
-    return _display_config.opacity >= 0.0 ? _display_config.opacity : _application_settings.opacity;
 }
 
 }

@@ -1,8 +1,12 @@
 <RCC>
     <qresource prefix="/configs">
         <file alias="dashboard.json">../configs/dashboard.json</file>
+        <file alias="commands.json">../configs/commands.json</file>
     </qresource>
     <qresource prefix="/themes">
         <file alias="Dark.qss">themes/Dark.qss</file>
+    </qresource>
+    <qresource prefix="/terbon">
+        <file alias="bon.ico">terbon/bon.ico</file>
     </qresource>
 </RCC>

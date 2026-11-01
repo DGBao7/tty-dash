@@ -24,6 +24,19 @@ add_executable(TtyDashboard WIN32
     include/hotkeys/HotkeyManager.h
     include/layout/LayoutManager.h
     include/services/SystemMonitor.h
+    include/theme/Theme.h
+    include/terbon/TerBonController.h
+    include/terbon/TerBonWindow.h
+    include/terbon/ui/TerminalWidget.h
+    include/terbon/ui/StatusBar.h
+    include/terbon/ui/themes/Colors.h
+    include/terbon/ui/themes/Interface.h
+    include/terbon/pas/Command.h
+    include/terbon/pas/Sys.h
+    include/terbon/str/AnalizeStr.h
+    include/terbon/str/AnalyzePath.h
+    include/terbon/str/clangCode.h
+    include/terbon/nlohmann/json.hpp
     include/utils/Logger.h
     include/widgets/DashboardWidget.h
     include/widgets/WidgetManager.h
@@ -43,6 +56,17 @@ add_executable(TtyDashboard WIN32
     src/hotkeys/HotkeyManager.cpp
     src/layout/LayoutManager.cpp
     src/services/SystemMonitor.cpp
+    src/terbon/TerBonController.cpp
+    src/terbon/TerBonWindow.cpp
+    src/terbon/ui/TerminalWidget.cpp
+    src/terbon/ui/StatusBar.cpp
+    src/terbon/ui/themes/Colors.cpp
+    src/terbon/ui/themes/Interface.cpp
+    src/terbon/pas/Command.cpp
+    src/terbon/pas/Sys.cpp
+    src/terbon/str/AnalizeStr.cpp
+    src/terbon/str/AnalyzePath.cpp
+    src/terbon/str/clangCode.cpp
     src/utils/Logger.cpp
     src/widgets/DashboardWidget.cpp
     src/widgets/WidgetManager.cpp
@@ -59,6 +83,7 @@ add_executable(TtyDashboard WIN32
 target_include_directories(TtyDashboard
     PRIVATE
         include
+        include/terbon
 )
 
 target_compile_definitions(TtyDashboard
@@ -77,6 +102,12 @@ target_link_libraries(TtyDashboard
         dwmapi
         iphlpapi
         user32
+)
+
+add_custom_command(TARGET TtyDashboard POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:TtyDashboard>/configs"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/configs/commands.json" "$<TARGET_FILE_DIR:TtyDashboard>/configs/commands.json"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/resources/terbon/clang-format" "$<TARGET_FILE_DIR:TtyDashboard>/.clang-format"
 )
 
 if(MSVC)

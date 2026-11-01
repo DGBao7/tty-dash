@@ -1,14 +1,25 @@
 {
+  "schema_version": 3,
   "application": {
     "always_on_top": false,
     "click_through": true,
-    "opacity": 0.92,
+    "opacity": 1.0,
     "monitoring_interval_ms": 1500
   },
   "effects": {
-    "blur": true,
-    "backdrop": "acrylic",
-    "background_color": "#66071016"
+    "blur": false,
+    "backdrop": "none",
+    "background_color": "#00000000"
+  },
+  "terbon": {
+    "enabled": true,
+    "visible_on_startup": true,
+    "monitor": "primary",
+    "position": "right",
+    "width": 700,
+    "height": 420,
+    "remember_geometry": true,
+    "has_saved_geometry": false
   },
   "displays": [
     {
@@ -29,7 +40,7 @@
           "id": "clock",
           "type": "clock",
           "enabled": true,
-          "position": { "mode": "custom", "x": 32, "y": 30 },
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
           "size": { "width": 340, "height": 112 },
           "options": {
             "time_format": "HH:mm:ss",
@@ -41,7 +52,7 @@
           "id": "cpu",
           "type": "cpu",
           "enabled": true,
-          "position": { "mode": "custom", "x": 32, "y": 160 },
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
           "size": { "width": 290, "height": 112 },
           "options": { "show_graph": true }
         },
@@ -49,7 +60,7 @@
           "id": "ram",
           "type": "ram",
           "enabled": true,
-          "position": { "mode": "custom", "x": 32, "y": 292 },
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
           "size": { "width": 290, "height": 112 },
           "options": { "show_graph": true }
         },
@@ -57,7 +68,7 @@
           "id": "network",
           "type": "network",
           "enabled": true,
-          "position": { "mode": "custom", "x": 32, "y": 424 },
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
           "size": { "width": 290, "height": 112 },
           "options": { "speed_unit": "auto" }
         },
@@ -65,7 +76,7 @@
           "id": "matrix",
           "type": "matrix",
           "enabled": true,
-          "position": { "mode": "top_right", "x": 32, "y": 32, "margins": { "right": 32, "top": 32 } },
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
           "size": { "width": 420, "height": 500 },
           "options": { "animation_speed": 1.0, "density": 1.0, "interval_ms": 75 }
         },
@@ -73,7 +84,7 @@
           "id": "pipes",
           "type": "pipes",
           "enabled": true,
-          "position": { "mode": "bottom_right", "x": 32, "y": 32, "margins": { "right": 32, "bottom": 32 } },
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
           "size": { "width": 400, "height": 220 },
           "options": { "animation_speed": 1.0, "interval_ms": 105 }
         }

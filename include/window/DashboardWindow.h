@@ -3,7 +3,6 @@
 #include "config/ConfigManager.h"
 #include "window/WindowEffects.h"
 
-#include <QColor>
 #include <QWidget>
 
 class QScreen;
@@ -29,15 +28,12 @@ signals:
     void widget_geometry_changed(const QString &display_name , const QString &widget_id , const QRect &geometry);
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
     void showEvent(QShowEvent *event) override;
 
 private:
     void _apply_flags();
     void _apply_native_styles();
     void _apply_widget_layout(LayoutManager &layout_manager , WidgetManager &widget_manager , SystemMonitor *system_monitor);
-    QColor _effective_background_color() const;
-    qreal _effective_opacity() const;
 
     DisplayConfig _display_config;
     ApplicationSettings _application_settings;
@@ -45,7 +41,6 @@ private:
     QString _display_name;
     bool _click_through_enabled = true;
     bool _native_backdrop_applied = false;
-    QColor _background_color;
     WindowEffects _window_effects;
 };
 

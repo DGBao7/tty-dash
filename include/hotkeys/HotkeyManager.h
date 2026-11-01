@@ -22,6 +22,7 @@ signals:
     void visibility_toggle_requested();
     void configuration_reload_requested();
     void interaction_toggle_requested();
+    void terbon_visibility_toggle_requested();
 
 private:
     bool _started = false;

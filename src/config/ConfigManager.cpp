@@ -51,11 +51,20 @@ QString _valid_position_mode(const QString &mode , const QString &fallback) {
         QStringLiteral("bottom_left") ,
         QStringLiteral("bottom_right") ,
         QStringLiteral("center") ,
-        QStringLiteral("custom")
+        QStringLiteral("custom") ,
+        QStringLiteral("adaptive_right")
     };
     const QString normalized = mode.toLower();
 
     return modes.contains(normalized) ? normalized : fallback;
+}
+
+QJsonObject _without_keys(const QJsonObject &source , const QStringList &keys) {
+    QJsonObject result = source;
+    for (const QString &key : keys) {
+        result.remove(key);
+    }
+    return result;
 }
 
 }
@@ -183,6 +192,16 @@ bool ConfigManager::_update_widget_geometry(const QString &display_name , const 
     return false;
 }
 
+bool ConfigManager::_update_terbon_settings(const TerBonSettings &settings) {
+    _config.terbon = settings;
+    return _save();
+}
+
+bool ConfigManager::_set_terbon_visible_on_startup(bool visible) {
+    _config.terbon.visible_on_startup = visible;
+    return _save();
+}
+
 QString ConfigManager::_path() const {
     return _config_path;
 }
@@ -204,12 +223,12 @@ DashboardConfig ConfigManager::_default_config() const {
         display.widgets.append(widget);
     };
 
-    add_widget(QStringLiteral("clock") , QStringLiteral("clock") , 32 , 30 , 340 , 112);
-    add_widget(QStringLiteral("cpu") , QStringLiteral("cpu") , 32 , 160 , 290 , 112);
-    add_widget(QStringLiteral("ram") , QStringLiteral("ram") , 32 , 292 , 290 , 112);
-    add_widget(QStringLiteral("network") , QStringLiteral("network") , 32 , 424 , 290 , 112);
-    add_widget(QStringLiteral("matrix") , QStringLiteral("matrix") , 32 , 32 , 420 , 500 , QStringLiteral("top_right"));
-    add_widget(QStringLiteral("pipes") , QStringLiteral("pipes") , 32 , 32 , 400 , 220 , QStringLiteral("bottom_right"));
+    add_widget(QStringLiteral("clock") , QStringLiteral("clock") , 0 , 0 , 340 , 112 , QStringLiteral("adaptive_right"));
+    add_widget(QStringLiteral("cpu") , QStringLiteral("cpu") , 0 , 0 , 290 , 112 , QStringLiteral("adaptive_right"));
+    add_widget(QStringLiteral("ram") , QStringLiteral("ram") , 0 , 0 , 290 , 112 , QStringLiteral("adaptive_right"));
+    add_widget(QStringLiteral("network") , QStringLiteral("network") , 0 , 0 , 290 , 112 , QStringLiteral("adaptive_right"));
+    add_widget(QStringLiteral("matrix") , QStringLiteral("matrix") , 0 , 0 , 420 , 500 , QStringLiteral("adaptive_right"));
+    add_widget(QStringLiteral("pipes") , QStringLiteral("pipes") , 0 , 0 , 400 , 220 , QStringLiteral("adaptive_right"));
     config.displays.append(display);
 
     return config;
@@ -231,19 +250,40 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
         return false;
     }
 
+    const int schema_version = _integer(root , QStringLiteral("schema_version") , 1);
+    config.schema_version = 3;
+    config.extra = _without_keys(root , {QStringLiteral("schema_version") , QStringLiteral("application") , QStringLiteral("effects") , QStringLiteral("displays") , QStringLiteral("terbon")});
+
     const QJsonObject application = root.value(QStringLiteral("application")).toObject();
     config.application.always_on_top = application.value(QStringLiteral("always_on_top")).toBool(false);
     config.application.click_through = application.value(QStringLiteral("click_through")).toBool(true);
-    config.application.opacity = _bounded_opacity(application.value(QStringLiteral("opacity")) , 0.92);
+    config.application.opacity = _bounded_opacity(application.value(QStringLiteral("opacity")) , 1.0);
     config.application.monitoring_interval_ms = std::clamp(_integer(application , QStringLiteral("monitoring_interval_ms") , 1500) , 500 , 10000);
+    config.application.extra = _without_keys(application , {QStringLiteral("always_on_top") , QStringLiteral("click_through") , QStringLiteral("opacity") , QStringLiteral("monitoring_interval_ms")});
 
     const QJsonObject effects = root.value(QStringLiteral("effects")).toObject();
-    config.effects.blur = effects.value(QStringLiteral("blur")).toBool(true);
-    config.effects.backdrop = _valid_backdrop(effects.value(QStringLiteral("backdrop")).toString(QStringLiteral("acrylic")));
-    const QString background = effects.value(QStringLiteral("background_color")).toString(QStringLiteral("#66071016"));
+    config.effects.blur = effects.value(QStringLiteral("blur")).toBool(false);
+    config.effects.backdrop = _valid_backdrop(effects.value(QStringLiteral("backdrop")).toString(QStringLiteral("none")));
+    const QString background = effects.value(QStringLiteral("background_color")).toString(QStringLiteral("#00000000"));
     if (QColor(background).isValid()) {
         config.effects.background_color = background;
     }
+    config.effects.extra = _without_keys(effects , {QStringLiteral("blur") , QStringLiteral("backdrop") , QStringLiteral("background_color")});
+
+    const QJsonObject terminal = root.value(QStringLiteral("terbon")).toObject();
+    config.terbon.extra = _without_keys(terminal , {QStringLiteral("enabled") , QStringLiteral("visible_on_startup") , QStringLiteral("monitor") , QStringLiteral("position") , QStringLiteral("width") , QStringLiteral("height") , QStringLiteral("remember_geometry") , QStringLiteral("has_saved_geometry") , QStringLiteral("x") , QStringLiteral("y")});
+    config.terbon.enabled = terminal.value(QStringLiteral("enabled")).toBool(true);
+    config.terbon.visible_on_startup = terminal.value(QStringLiteral("visible_on_startup")).toBool(true);
+    config.terbon.monitor = terminal.value(QStringLiteral("monitor")).toString(QStringLiteral("primary")).trimmed();
+    if (config.terbon.monitor.isEmpty()) config.terbon.monitor = QStringLiteral("primary");
+    config.terbon.position = terminal.value(QStringLiteral("position")).toString(QStringLiteral("right")).toLower();
+    if (config.terbon.position != QStringLiteral("right") && config.terbon.position != QStringLiteral("custom")) config.terbon.position = QStringLiteral("right");
+    config.terbon.width = std::clamp(_integer(terminal , QStringLiteral("width") , 700) , 420 , 4000);
+    config.terbon.height = std::clamp(_integer(terminal , QStringLiteral("height") , 420) , 260 , 3000);
+    config.terbon.remember_geometry = terminal.value(QStringLiteral("remember_geometry")).toBool(true);
+    config.terbon.has_saved_geometry = terminal.value(QStringLiteral("has_saved_geometry")).toBool(terminal.contains(QStringLiteral("x")) && terminal.contains(QStringLiteral("y")));
+    config.terbon.x = _integer(terminal , QStringLiteral("x") , 0);
+    config.terbon.y = _integer(terminal , QStringLiteral("y") , 0);
 
     QSet<QString> display_names;
     const QJsonArray display_array = root.value(QStringLiteral("displays")).toArray();
@@ -280,6 +320,7 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
 
             continue;
         }
+        display.extra = _without_keys(object , {QStringLiteral("name") , QStringLiteral("position_mode") , QStringLiteral("x") , QStringLiteral("y") , QStringLiteral("width") , QStringLiteral("height") , QStringLiteral("margins") , QStringLiteral("opacity") , QStringLiteral("backdrop") , QStringLiteral("background_color") , QStringLiteral("widgets")});
         display_names.insert(display.name);
 
         QSet<QString> widget_ids;
@@ -311,6 +352,7 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
             widget.height = std::clamp(_integer(size , QStringLiteral("height") , _integer(widget_object , QStringLiteral("height") , 120)) , 32 , 10000);
             widget.margins = _parse_margins(position.value(QStringLiteral("margins")).toObject());
             widget.options = widget_object.value(QStringLiteral("options")).toObject();
+            widget.extra = _without_keys(widget_object , {QStringLiteral("id") , QStringLiteral("type") , QStringLiteral("enabled") , QStringLiteral("position") , QStringLiteral("position_mode") , QStringLiteral("x") , QStringLiteral("y") , QStringLiteral("size") , QStringLiteral("width") , QStringLiteral("height") , QStringLiteral("options") , QStringLiteral("color") , QStringLiteral("font_family") , QStringLiteral("font_size") , QStringLiteral("display_font_size") , QStringLiteral("panel_color") , QStringLiteral("text_color") , QStringLiteral("show_graph") , QStringLiteral("animation_speed") , QStringLiteral("interval_ms") , QStringLiteral("density") , QStringLiteral("time_format") , QStringLiteral("date_format") , QStringLiteral("speed_unit")});
 
             const auto copy_option = [&widget , &widget_object](const QString &key) {
                 if (widget_object.contains(key)) {
@@ -341,24 +383,46 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
         config.displays = _default_config().displays;
     }
 
+    if (schema_version < 3) {
+        config.application.opacity = 1.0;
+        config.effects.blur = false;
+        config.effects.backdrop = QStringLiteral("none");
+        config.effects.background_color = QStringLiteral("#00000000");
+        for (DisplayConfig &display : config.displays) {
+            display.opacity = -1.0;
+            display.backdrop = QStringLiteral("none");
+            display.background_color = QStringLiteral("#00000000");
+            for (WidgetConfig &widget : display.widgets) {
+                const bool old_default =
+                    (widget.id == QStringLiteral("clock") && widget.x == 32 && widget.y == 30) ||
+                    (widget.id == QStringLiteral("cpu") && widget.x == 32 && widget.y == 160) ||
+                    (widget.id == QStringLiteral("ram") && widget.x == 32 && widget.y == 292) ||
+                    (widget.id == QStringLiteral("network") && widget.x == 32 && widget.y == 424) ||
+                    (widget.id == QStringLiteral("matrix") && widget.position_mode == QStringLiteral("top_right") && widget.x == 32 && widget.y == 32) ||
+                    (widget.id == QStringLiteral("pipes") && widget.position_mode == QStringLiteral("bottom_right") && widget.x == 32 && widget.y == 32);
+                if (old_default) widget.position_mode = QStringLiteral("adaptive_right");
+            }
+        }
+    }
+
     return true;
 }
 
 QByteArray ConfigManager::_serialize() const {
-    QJsonObject application;
+    QJsonObject application = _config.application.extra;
     application.insert(QStringLiteral("always_on_top") , _config.application.always_on_top);
     application.insert(QStringLiteral("click_through") , _config.application.click_through);
     application.insert(QStringLiteral("opacity") , _config.application.opacity);
     application.insert(QStringLiteral("monitoring_interval_ms") , _config.application.monitoring_interval_ms);
 
-    QJsonObject effects;
+    QJsonObject effects = _config.effects.extra;
     effects.insert(QStringLiteral("blur") , _config.effects.blur);
     effects.insert(QStringLiteral("backdrop") , _config.effects.backdrop);
     effects.insert(QStringLiteral("background_color") , _config.effects.background_color);
 
     QJsonArray displays;
     for (const DisplayConfig &display : _config.displays) {
-        QJsonObject object;
+        QJsonObject object = display.extra;
         object.insert(QStringLiteral("name") , display.name);
         object.insert(QStringLiteral("position_mode") , display.position_mode);
         object.insert(QStringLiteral("x") , display.x);
@@ -383,7 +447,7 @@ QByteArray ConfigManager::_serialize() const {
 
         QJsonArray widgets;
         for (const WidgetConfig &widget : display.widgets) {
-            QJsonObject widget_object;
+            QJsonObject widget_object = widget.extra;
             widget_object.insert(QStringLiteral("id") , widget.id);
             widget_object.insert(QStringLiteral("type") , widget.type);
             widget_object.insert(QStringLiteral("enabled") , widget.enabled);
@@ -410,10 +474,26 @@ QByteArray ConfigManager::_serialize() const {
         displays.append(object);
     }
 
-    QJsonObject root;
+    QJsonObject root = _config.extra;
+    root.insert(QStringLiteral("schema_version") , 3);
     root.insert(QStringLiteral("application") , application);
     root.insert(QStringLiteral("effects") , effects);
     root.insert(QStringLiteral("displays") , displays);
+    const TerBonSettings &terminal = _config.terbon;
+    QJsonObject terbon = terminal.extra;
+    terbon.insert(QStringLiteral("enabled") , terminal.enabled);
+    terbon.insert(QStringLiteral("visible_on_startup") , terminal.visible_on_startup);
+    terbon.insert(QStringLiteral("monitor") , terminal.monitor);
+    terbon.insert(QStringLiteral("position") , terminal.position);
+    terbon.insert(QStringLiteral("width") , terminal.width);
+    terbon.insert(QStringLiteral("height") , terminal.height);
+    terbon.insert(QStringLiteral("remember_geometry") , terminal.remember_geometry);
+    terbon.insert(QStringLiteral("has_saved_geometry") , terminal.has_saved_geometry);
+    if (terminal.has_saved_geometry || terminal.position == QStringLiteral("custom")) {
+        terbon.insert(QStringLiteral("x") , terminal.x);
+        terbon.insert(QStringLiteral("y") , terminal.y);
+    }
+    root.insert(QStringLiteral("terbon") , terbon);
 
     return QJsonDocument(root).toJson(QJsonDocument::Indented);
 }

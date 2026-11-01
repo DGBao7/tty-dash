@@ -142,7 +142,7 @@ bool WindowEffects::_apply(HWND hwnd , const EffectsSettings &settings , const Q
         }
     }
 
-    Logger::_warning(QStringLiteral("Requested DWM backdrop is unavailable; using the configured translucent color"));
+    Logger::_warning(QStringLiteral("Requested DWM backdrop is unavailable; dashboard host remains transparent"));
 
     return false;
 }
@@ -154,6 +154,8 @@ void WindowEffects::_clear(HWND hwnd) const {
 
     const DWORD no_backdrop = 1;
     DwmSetWindowAttribute(hwnd , _dwmwa_system_backdrop_type , &no_backdrop , sizeof(no_backdrop));
+    const MARGINS no_extended_frame{0 , 0 , 0 , 0};
+    DwmExtendFrameIntoClientArea(hwnd , &no_extended_frame);
 
     const HMODULE user32 = GetModuleHandleW(L"user32.dll");
     const auto set_composition_attribute = user32

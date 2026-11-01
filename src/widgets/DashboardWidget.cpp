@@ -1,4 +1,5 @@
 #include "widgets/DashboardWidget.h"
+#include "theme/Theme.h"
 
 #include <QMouseEvent>
 #include <QPainter>
@@ -19,9 +20,9 @@ DashboardWidget::DashboardWidget(const WidgetConfig &config , QWidget *parent)
     : QWidget(parent)
     , _id(config.id)
     , _title(config.options.value(QStringLiteral("title")).toString(config.type.toUpper())) {
-    _accent_color = _option_color(config.options , QStringLiteral("color") , QColor(QStringLiteral("#62F5A5")));
-    _text_color = _option_color(config.options , QStringLiteral("text_color") , QColor(QStringLiteral("#D8F5E5")));
-    _panel_color = _option_color(config.options , QStringLiteral("panel_color") , QColor(QStringLiteral("#D906161B")));
+    _accent_color = _option_color(config.options , QStringLiteral("color") , Theme::primary);
+    _text_color = _option_color(config.options , QStringLiteral("text_color") , Theme::text);
+    _panel_color = _option_color(config.options , QStringLiteral("panel_color") , Theme::panel);
 
     const QString family = config.options.value(QStringLiteral("font_family")).toString(QStringLiteral("Consolas"));
     const int size = qBound(8 , config.options.value(QStringLiteral("font_size")).toInt(11) , 48);
@@ -45,7 +46,7 @@ void DashboardWidget::_set_interaction_enabled(bool enabled) {
 void DashboardWidget::_paint_panel(QPainter &painter , const QString &title) const {
     const QRectF panel = QRectF(rect()).adjusted(1.0 , 1.0 , -1.0 , -1.0);
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.setPen(QPen(_accent_color.darker(150) , 1.0));
+    painter.setPen(QPen(Theme::border , 1.0));
     painter.setBrush(_panel_color);
     painter.drawRoundedRect(panel , 8.0 , 8.0);
     painter.fillRect(QRectF(2.0 , 10.0 , 3.0 , height() - 20.0) , _accent_color);

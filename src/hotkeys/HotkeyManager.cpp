@@ -15,6 +15,7 @@ constexpr int _exit_hotkey = 0x711;
 constexpr int _visibility_hotkey = 0x712;
 constexpr int _reload_hotkey = 0x713;
 constexpr int _interaction_hotkey = 0x714;
+constexpr int _terbon_visibility_hotkey = 0x715;
 
 }
 
@@ -40,7 +41,8 @@ void HotkeyManager::_start() {
         {_exit_hotkey , 'Q' , L"Ctrl+Alt+Q"} ,
         {_visibility_hotkey , 'H' , L"Ctrl+Alt+H"} ,
         {_reload_hotkey , 'R' , L"Ctrl+Alt+R"} ,
-        {_interaction_hotkey , 'I' , L"Ctrl+Alt+I"}
+        {_interaction_hotkey , 'I' , L"Ctrl+Alt+I"} ,
+        {_terbon_visibility_hotkey , 'T' , L"Ctrl+Alt+T"}
     };
 
     QCoreApplication::instance()->installNativeEventFilter(this);
@@ -70,6 +72,7 @@ void HotkeyManager::_stop() {
     UnregisterHotKey(nullptr , _visibility_hotkey);
     UnregisterHotKey(nullptr , _reload_hotkey);
     UnregisterHotKey(nullptr , _interaction_hotkey);
+    UnregisterHotKey(nullptr , _terbon_visibility_hotkey);
 #endif
     _started = false;
     _registered_hotkeys = 0;
@@ -100,6 +103,9 @@ bool HotkeyManager::nativeEventFilter(const QByteArray &event_type , void *messa
         return true;
     case _interaction_hotkey:
         emit interaction_toggle_requested();
+        return true;
+    case _terbon_visibility_hotkey:
+        emit terbon_visibility_toggle_requested();
         return true;
     default:
         break;

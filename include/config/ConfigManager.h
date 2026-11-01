@@ -20,6 +20,7 @@ struct WidgetConfig {
     int height = 120;
     QMargins margins;
     QJsonObject options;
+    QJsonObject extra;
 };
 
 struct DisplayConfig {
@@ -34,25 +35,45 @@ struct DisplayConfig {
     QString backdrop;
     QString background_color;
     QVector<WidgetConfig> widgets;
+    QJsonObject extra;
 };
 
 struct ApplicationSettings {
     bool always_on_top = false;
     bool click_through = true;
-    qreal opacity = 0.92;
+    qreal opacity = 1.0;
     int monitoring_interval_ms = 1500;
+    QJsonObject extra;
 };
 
 struct EffectsSettings {
-    bool blur = true;
-    QString backdrop = QStringLiteral("acrylic");
-    QString background_color = QStringLiteral("#66071016");
+    bool blur = false;
+    QString backdrop = QStringLiteral("none");
+    QString background_color = QStringLiteral("#00000000");
+    QJsonObject extra;
+};
+
+struct TerBonSettings {
+    bool enabled = true;
+    bool visible_on_startup = true;
+    QString monitor = QStringLiteral("primary");
+    QString position = QStringLiteral("right");
+    int width = 700;
+    int height = 420;
+    bool remember_geometry = true;
+    bool has_saved_geometry = false;
+    int x = 0;
+    int y = 0;
+    QJsonObject extra;
 };
 
 struct DashboardConfig {
+    int schema_version = 3;
     ApplicationSettings application;
     EffectsSettings effects;
+    TerBonSettings terbon;
     QVector<DisplayConfig> displays;
+    QJsonObject extra;
 };
 
 class ConfigManager {
@@ -63,6 +84,8 @@ public:
     bool _save();
     bool _set_click_through(bool enabled);
     bool _update_widget_geometry(const QString &display_name , const QString &widget_id , const QRect &geometry);
+    bool _update_terbon_settings(const TerBonSettings &settings);
+    bool _set_terbon_visible_on_startup(bool visible);
     QString _path() const;
 
 private:
