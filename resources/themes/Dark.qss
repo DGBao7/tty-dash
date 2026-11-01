@@ -1,0 +1,5 @@
+QWidget {
+    color: #D8F5E5;
+    font-family: Consolas, monospace;
+    background: transparent;
+}

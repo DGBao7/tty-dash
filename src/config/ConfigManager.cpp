@@ -1,0 +1,430 @@
+#include "config/ConfigManager.h"
+
+#include "utils/Logger.h"
+
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonParseError>
+#include <QSaveFile>
+#include <QSet>
+#include <QStandardPaths>
+#include <QCoreApplication>
+
+#include <algorithm>
+
+namespace ttydash {
+namespace {
+
+int _integer(const QJsonObject &object , const QString &key , int fallback) {
+    const QJsonValue value = object.value(key);
+
+    if (!value.isDouble()) {
+        return fallback;
+    }
+
+    return value.toInt(fallback);
+}
+
+qreal _bounded_opacity(const QJsonValue &value , qreal fallback) {
+    if (!value.isDouble()) {
+        return fallback;
+    }
+
+    return std::clamp(value.toDouble() , 0.0 , 1.0);
+}
+
+QString _valid_backdrop(const QString &backdrop) {
+    if (backdrop == QStringLiteral("acrylic") || backdrop == QStringLiteral("mica")) {
+        return backdrop;
+    }
+
+    return QStringLiteral("none");
+}
+
+QString _valid_position_mode(const QString &mode , const QString &fallback) {
+    static const QSet<QString> modes{
+        QStringLiteral("top_left") ,
+        QStringLiteral("top_right") ,
+        QStringLiteral("bottom_left") ,
+        QStringLiteral("bottom_right") ,
+        QStringLiteral("center") ,
+        QStringLiteral("custom")
+    };
+    const QString normalized = mode.toLower();
+
+    return modes.contains(normalized) ? normalized : fallback;
+}
+
+}
+
+ConfigManager::ConfigManager() {
+    _config_path = qEnvironmentVariable("TTY_DASH_CONFIG");
+    if (_config_path.isEmpty()) {
+        _config_path = QDir(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation))
+            .filePath(QStringLiteral("dashboard.json"));
+    }
+}
+
+DashboardConfig ConfigManager::_load() {
+    QFile file(_config_path);
+    QByteArray contents;
+
+    if (file.exists() && file.open(QIODevice::ReadOnly)) {
+        contents = file.readAll();
+        file.close();
+    } else {
+        const QString portable_path = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("dashboard.json"));
+        QFile portable(portable_path);
+        if (portable.open(QIODevice::ReadOnly)) {
+            _config_path = portable_path;
+            contents = portable.readAll();
+        }
+
+        QFile defaults(QStringLiteral(":/configs/dashboard.json"));
+
+        if (contents.isEmpty() && defaults.open(QIODevice::ReadOnly)) {
+            contents = defaults.readAll();
+        }
+    }
+
+    DashboardConfig loaded;
+    if (contents.isEmpty() || !_parse(contents , loaded)) {
+        if (!contents.isEmpty()) {
+            Logger::_warning(QStringLiteral("Configuration is invalid; restoring defaults from %1").arg(_config_path));
+        }
+
+        _config = _default_config();
+        _save();
+
+        return _config;
+    }
+
+    _config = loaded;
+    _save();
+
+    return _config;
+}
+
+bool ConfigManager::_save() {
+    const QByteArray data = _serialize();
+    QString failure;
+    const auto write_to_path = [&data , &failure](const QString &path) {
+        const QFileInfo info(path);
+        if (!QDir().mkpath(info.absolutePath())) {
+            failure = QStringLiteral("could not create directory %1").arg(info.absolutePath());
+
+            return false;
+        }
+
+        QSaveFile file(path);
+        if (!file.open(QIODevice::WriteOnly)) {
+            failure = file.errorString();
+
+            return false;
+        }
+        if (file.write(data) != data.size() || !file.commit()) {
+            failure = file.errorString();
+
+            return false;
+        }
+
+        return true;
+    };
+
+    if (write_to_path(_config_path)) {
+        return true;
+    }
+
+    Logger::_warning(QStringLiteral("Could not save configuration to %1: %2; trying a portable location")
+        .arg(_config_path , failure));
+    const QString portable_path = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("dashboard.json"));
+    if (portable_path != _config_path && write_to_path(portable_path)) {
+        _config_path = portable_path;
+        Logger::_info(QStringLiteral("Using portable configuration at %1").arg(_config_path));
+
+        return true;
+    }
+
+    Logger::_error(QStringLiteral("Could not save configuration to a writable location: %1").arg(failure));
+
+    return false;
+}
+
+bool ConfigManager::_set_click_through(bool enabled) {
+    _config.application.click_through = enabled;
+
+    return _save();
+}
+
+bool ConfigManager::_update_widget_geometry(const QString &display_name , const QString &widget_id , const QRect &geometry) {
+    for (DisplayConfig &display : _config.displays) {
+        if (display.name != display_name) {
+            continue;
+        }
+
+        for (WidgetConfig &widget : display.widgets) {
+            if (widget.id != widget_id) {
+                continue;
+            }
+
+            widget.position_mode = QStringLiteral("custom");
+            widget.x = geometry.x();
+            widget.y = geometry.y();
+            widget.width = geometry.width();
+            widget.height = geometry.height();
+
+            return _save();
+        }
+    }
+
+    return false;
+}
+
+QString ConfigManager::_path() const {
+    return _config_path;
+}
+
+DashboardConfig ConfigManager::_default_config() const {
+    DashboardConfig config;
+    DisplayConfig display;
+    display.name = QStringLiteral("primary");
+
+    const auto add_widget = [&display](const QString &id , const QString &type , int x , int y , int width , int height , const QString &mode = QStringLiteral("custom")) {
+        WidgetConfig widget;
+        widget.id = id;
+        widget.type = type;
+        widget.x = x;
+        widget.y = y;
+        widget.width = width;
+        widget.height = height;
+        widget.position_mode = mode;
+        display.widgets.append(widget);
+    };
+
+    add_widget(QStringLiteral("clock") , QStringLiteral("clock") , 32 , 30 , 340 , 112);
+    add_widget(QStringLiteral("cpu") , QStringLiteral("cpu") , 32 , 160 , 290 , 112);
+    add_widget(QStringLiteral("ram") , QStringLiteral("ram") , 32 , 292 , 290 , 112);
+    add_widget(QStringLiteral("network") , QStringLiteral("network") , 32 , 424 , 290 , 112);
+    add_widget(QStringLiteral("matrix") , QStringLiteral("matrix") , 32 , 32 , 420 , 500 , QStringLiteral("top_right"));
+    add_widget(QStringLiteral("pipes") , QStringLiteral("pipes") , 32 , 32 , 400 , 220 , QStringLiteral("bottom_right"));
+    config.displays.append(display);
+
+    return config;
+}
+
+bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config) const {
+    QJsonParseError parse_error;
+    const QJsonDocument document = QJsonDocument::fromJson(json_data , &parse_error);
+    if (parse_error.error != QJsonParseError::NoError || !document.isObject()) {
+        Logger::_error(QStringLiteral("JSON parse error at byte %1: %2").arg(parse_error.offset).arg(parse_error.errorString()));
+
+        return false;
+    }
+
+    const QJsonObject root = document.object();
+    if (!root.value(QStringLiteral("application")).isObject() || !root.value(QStringLiteral("displays")).isArray()) {
+        Logger::_error(QStringLiteral("Configuration must contain application and displays objects"));
+
+        return false;
+    }
+
+    const QJsonObject application = root.value(QStringLiteral("application")).toObject();
+    config.application.always_on_top = application.value(QStringLiteral("always_on_top")).toBool(false);
+    config.application.click_through = application.value(QStringLiteral("click_through")).toBool(true);
+    config.application.opacity = _bounded_opacity(application.value(QStringLiteral("opacity")) , 0.92);
+    config.application.monitoring_interval_ms = std::clamp(_integer(application , QStringLiteral("monitoring_interval_ms") , 1500) , 500 , 10000);
+
+    const QJsonObject effects = root.value(QStringLiteral("effects")).toObject();
+    config.effects.blur = effects.value(QStringLiteral("blur")).toBool(true);
+    config.effects.backdrop = _valid_backdrop(effects.value(QStringLiteral("backdrop")).toString(QStringLiteral("acrylic")));
+    const QString background = effects.value(QStringLiteral("background_color")).toString(QStringLiteral("#66071016"));
+    if (QColor(background).isValid()) {
+        config.effects.background_color = background;
+    }
+
+    QSet<QString> display_names;
+    const QJsonArray display_array = root.value(QStringLiteral("displays")).toArray();
+    for (const QJsonValue &display_value : display_array) {
+        if (!display_value.isObject()) {
+            continue;
+        }
+
+        const QJsonObject object = display_value.toObject();
+        if (!object.value(QStringLiteral("widgets")).isArray()) {
+            continue;
+        }
+
+        DisplayConfig display;
+        display.name = object.value(QStringLiteral("name")).toString(QStringLiteral("primary"));
+        display.position_mode = _valid_position_mode(object.value(QStringLiteral("position_mode")).toString(QStringLiteral("top_left")) , QStringLiteral("top_left"));
+        display.x = _integer(object , QStringLiteral("x") , 0);
+        display.y = _integer(object , QStringLiteral("y") , 0);
+        display.width = std::max(0 , _integer(object , QStringLiteral("width") , 0));
+        display.height = std::max(0 , _integer(object , QStringLiteral("height") , 0));
+        display.margins = _parse_margins(object.value(QStringLiteral("margins")).toObject());
+        display.opacity = _bounded_opacity(object.value(QStringLiteral("opacity")) , -1.0);
+        display.backdrop = object.value(QStringLiteral("backdrop")).toString();
+        if (!display.backdrop.isEmpty()) {
+            display.backdrop = _valid_backdrop(display.backdrop);
+        }
+        display.background_color = object.value(QStringLiteral("background_color")).toString();
+        if (!QColor(display.background_color).isValid()) {
+            display.background_color.clear();
+        }
+
+        if (display_names.contains(display.name)) {
+            Logger::_warning(QStringLiteral("Ignoring duplicate display configuration %1").arg(display.name));
+
+            continue;
+        }
+        display_names.insert(display.name);
+
+        QSet<QString> widget_ids;
+        const QJsonArray widget_array = object.value(QStringLiteral("widgets")).toArray();
+        for (qsizetype index = 0; index < widget_array.size(); ++index) {
+            if (!widget_array.at(index).isObject()) {
+                continue;
+            }
+
+            const QJsonObject widget_object = widget_array.at(index).toObject();
+            WidgetConfig widget;
+            widget.type = widget_object.value(QStringLiteral("type")).toString().trimmed().toLower();
+            if (widget.type.isEmpty()) {
+                continue;
+            }
+
+            widget.id = widget_object.value(QStringLiteral("id")).toString(widget.type);
+            if (widget_ids.contains(widget.id)) {
+                widget.id = QStringLiteral("%1-%2").arg(widget.type).arg(index);
+            }
+            widget_ids.insert(widget.id);
+            widget.enabled = widget_object.value(QStringLiteral("enabled")).toBool(true);
+            const QJsonObject position = widget_object.value(QStringLiteral("position")).toObject();
+            const QJsonObject size = widget_object.value(QStringLiteral("size")).toObject();
+            widget.position_mode = _valid_position_mode(position.value(QStringLiteral("mode")).toString(widget_object.value(QStringLiteral("position_mode")).toString(QStringLiteral("custom"))) , QStringLiteral("custom"));
+            widget.x = _integer(position , QStringLiteral("x") , _integer(widget_object , QStringLiteral("x") , 0));
+            widget.y = _integer(position , QStringLiteral("y") , _integer(widget_object , QStringLiteral("y") , 0));
+            widget.width = std::clamp(_integer(size , QStringLiteral("width") , _integer(widget_object , QStringLiteral("width") , 300)) , 40 , 10000);
+            widget.height = std::clamp(_integer(size , QStringLiteral("height") , _integer(widget_object , QStringLiteral("height") , 120)) , 32 , 10000);
+            widget.margins = _parse_margins(position.value(QStringLiteral("margins")).toObject());
+            widget.options = widget_object.value(QStringLiteral("options")).toObject();
+
+            const auto copy_option = [&widget , &widget_object](const QString &key) {
+                if (widget_object.contains(key)) {
+                    widget.options.insert(key , widget_object.value(key));
+                }
+            };
+            copy_option(QStringLiteral("color"));
+            copy_option(QStringLiteral("font_family"));
+            copy_option(QStringLiteral("font_size"));
+            copy_option(QStringLiteral("display_font_size"));
+            copy_option(QStringLiteral("panel_color"));
+            copy_option(QStringLiteral("text_color"));
+            copy_option(QStringLiteral("show_graph"));
+            copy_option(QStringLiteral("animation_speed"));
+            copy_option(QStringLiteral("interval_ms"));
+            copy_option(QStringLiteral("density"));
+            copy_option(QStringLiteral("time_format"));
+            copy_option(QStringLiteral("date_format"));
+            copy_option(QStringLiteral("speed_unit"));
+            display.widgets.append(widget);
+        }
+
+        config.displays.append(display);
+    }
+
+    if (config.displays.isEmpty()) {
+        Logger::_warning(QStringLiteral("No valid displays were configured; using the primary display"));
+        config.displays = _default_config().displays;
+    }
+
+    return true;
+}
+
+QByteArray ConfigManager::_serialize() const {
+    QJsonObject application;
+    application.insert(QStringLiteral("always_on_top") , _config.application.always_on_top);
+    application.insert(QStringLiteral("click_through") , _config.application.click_through);
+    application.insert(QStringLiteral("opacity") , _config.application.opacity);
+    application.insert(QStringLiteral("monitoring_interval_ms") , _config.application.monitoring_interval_ms);
+
+    QJsonObject effects;
+    effects.insert(QStringLiteral("blur") , _config.effects.blur);
+    effects.insert(QStringLiteral("backdrop") , _config.effects.backdrop);
+    effects.insert(QStringLiteral("background_color") , _config.effects.background_color);
+
+    QJsonArray displays;
+    for (const DisplayConfig &display : _config.displays) {
+        QJsonObject object;
+        object.insert(QStringLiteral("name") , display.name);
+        object.insert(QStringLiteral("position_mode") , display.position_mode);
+        object.insert(QStringLiteral("x") , display.x);
+        object.insert(QStringLiteral("y") , display.y);
+        object.insert(QStringLiteral("width") , display.width);
+        object.insert(QStringLiteral("height") , display.height);
+        object.insert(QStringLiteral("margins") , QJsonObject{
+            {QStringLiteral("left") , display.margins.left()} ,
+            {QStringLiteral("top") , display.margins.top()} ,
+            {QStringLiteral("right") , display.margins.right()} ,
+            {QStringLiteral("bottom") , display.margins.bottom()}
+        });
+        if (display.opacity >= 0.0) {
+            object.insert(QStringLiteral("opacity") , display.opacity);
+        }
+        if (!display.backdrop.isEmpty()) {
+            object.insert(QStringLiteral("backdrop") , display.backdrop);
+        }
+        if (!display.background_color.isEmpty()) {
+            object.insert(QStringLiteral("background_color") , display.background_color);
+        }
+
+        QJsonArray widgets;
+        for (const WidgetConfig &widget : display.widgets) {
+            QJsonObject widget_object;
+            widget_object.insert(QStringLiteral("id") , widget.id);
+            widget_object.insert(QStringLiteral("type") , widget.type);
+            widget_object.insert(QStringLiteral("enabled") , widget.enabled);
+            widget_object.insert(QStringLiteral("position") , QJsonObject{
+                {QStringLiteral("mode") , widget.position_mode} ,
+                {QStringLiteral("x") , widget.x} ,
+                {QStringLiteral("y") , widget.y} ,
+                {QStringLiteral("margins") , QJsonObject{
+                    {QStringLiteral("left") , widget.margins.left()} ,
+                    {QStringLiteral("top") , widget.margins.top()} ,
+                    {QStringLiteral("right") , widget.margins.right()} ,
+                    {QStringLiteral("bottom") , widget.margins.bottom()}
+                }}
+            });
+            widget_object.insert(QStringLiteral("size") , QJsonObject{
+                {QStringLiteral("width") , widget.width} ,
+                {QStringLiteral("height") , widget.height}
+            });
+            widget_object.insert(QStringLiteral("options") , widget.options);
+            widgets.append(widget_object);
+        }
+
+        object.insert(QStringLiteral("widgets") , widgets);
+        displays.append(object);
+    }
+
+    QJsonObject root;
+    root.insert(QStringLiteral("application") , application);
+    root.insert(QStringLiteral("effects") , effects);
+    root.insert(QStringLiteral("displays") , displays);
+
+    return QJsonDocument(root).toJson(QJsonDocument::Indented);
+}
+
+QMargins ConfigManager::_parse_margins(const QJsonObject &object) const {
+    return QMargins(
+        std::max(0 , _integer(object , QStringLiteral("left") , 0)) ,
+        std::max(0 , _integer(object , QStringLiteral("top") , 0)) ,
+        std::max(0 , _integer(object , QStringLiteral("right") , 0)) ,
+        std::max(0 , _integer(object , QStringLiteral("bottom") , 0))
+    );
+}
+
+}

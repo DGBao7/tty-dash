@@ -1,0 +1,83 @@
+{
+  "application": {
+    "always_on_top": false,
+    "click_through": true,
+    "opacity": 0.92,
+    "monitoring_interval_ms": 1500
+  },
+  "effects": {
+    "blur": true,
+    "backdrop": "acrylic",
+    "background_color": "#66071016"
+  },
+  "displays": [
+    {
+      "name": "primary",
+      "position_mode": "top_left",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "margins": {
+        "left": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "widgets": [
+        {
+          "id": "clock",
+          "type": "clock",
+          "enabled": true,
+          "position": { "mode": "custom", "x": 32, "y": 30 },
+          "size": { "width": 340, "height": 112 },
+          "options": {
+            "time_format": "HH:mm:ss",
+            "date_format": "dddd, dd MMMM yyyy",
+            "display_font_size": 34
+          }
+        },
+        {
+          "id": "cpu",
+          "type": "cpu",
+          "enabled": true,
+          "position": { "mode": "custom", "x": 32, "y": 160 },
+          "size": { "width": 290, "height": 112 },
+          "options": { "show_graph": true }
+        },
+        {
+          "id": "ram",
+          "type": "ram",
+          "enabled": true,
+          "position": { "mode": "custom", "x": 32, "y": 292 },
+          "size": { "width": 290, "height": 112 },
+          "options": { "show_graph": true }
+        },
+        {
+          "id": "network",
+          "type": "network",
+          "enabled": true,
+          "position": { "mode": "custom", "x": 32, "y": 424 },
+          "size": { "width": 290, "height": 112 },
+          "options": { "speed_unit": "auto" }
+        },
+        {
+          "id": "matrix",
+          "type": "matrix",
+          "enabled": true,
+          "position": { "mode": "top_right", "x": 32, "y": 32, "margins": { "right": 32, "top": 32 } },
+          "size": { "width": 420, "height": 500 },
+          "options": { "animation_speed": 1.0, "density": 1.0, "interval_ms": 75 }
+        },
+        {
+          "id": "pipes",
+          "type": "pipes",
+          "enabled": true,
+          "position": { "mode": "bottom_right", "x": 32, "y": 32, "margins": { "right": 32, "bottom": 32 } },
+          "size": { "width": 400, "height": 220 },
+          "options": { "animation_speed": 1.0, "interval_ms": 105 }
+        }
+      ]
+    }
+  ]
+}
