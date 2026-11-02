@@ -24,9 +24,14 @@ Name: "desktopicon"; \
     Flags: unchecked
 
 [Files]
+
 Source: "..\dist\tty-dashboard\*"; \
-    DestDir: "{app}"; \
-    Flags: ignoreversion recursesubdirs createallsubdirs
+DestDir: "{app}"; \
+Flags: ignoreversion recursesubdirs createallsubdirs
+
+Source: "..\assets\*"; \
+DestDir: "{app}\assets"; \
+Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\TTY Dashboard"; \
