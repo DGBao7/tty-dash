@@ -12,7 +12,7 @@ MatrixWidget::MatrixWidget(const WidgetConfig &config , QWidget *parent)
     : DashboardWidget(config , parent) {
     _speed = qBound(0.2 , config.options.value(QStringLiteral("animation_speed")).toDouble(1.0) , 4.0);
     _density = qBound(0.3 , config.options.value(QStringLiteral("density")).toDouble(1.0) , 2.5);
-    _cell_width = qMax(8 , qRound(13.0 / _density));
+    _cell_width = qMax(5 , qRound(13.0 / _density));
     const int interval = qBound(25 , config.options.value(QStringLiteral("interval_ms")).toInt(75) , 500);
     connect(&_timer , &QTimer::timeout , this , [this]() {
         _advance();
@@ -26,7 +26,9 @@ void MatrixWidget::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     _paint_panel(painter , _title);
     painter.setFont(_font);
-    painter.setFont(QFont(QStringLiteral("Consolas") , qMax(8 , _font.pointSize())));
+    QFont matrix_font(QStringLiteral("Consolas"));
+    matrix_font.setPixelSize(qMax(7 , _cell_height - 1));
+    painter.setFont(matrix_font);
 
     const int visible_rows = qMax(1 , (height() - 38) / _cell_height);
     for (qsizetype column = 0; column < _drops.size(); ++column) {

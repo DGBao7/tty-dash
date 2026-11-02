@@ -27,13 +27,13 @@ void ClockWidget::paintEvent(QPaintEvent *event) {
     display_font.setBold(true);
     painter.setFont(display_font);
     painter.setPen(_text_color);
-    painter.drawText(QRect(16 , 34 , width() - 30 , 52) , Qt::AlignLeft | Qt::AlignVCenter , _time_text);
+    painter.drawText(QRect(10 , 34 , width() - 20 , 58) , Qt::AlignHCenter | Qt::AlignVCenter , _time_text);
 
     QFont date_font = _font;
     date_font.setPixelSize(qMax(10 , _display_font_size / 3));
     painter.setFont(date_font);
     painter.setPen(_accent_color);
-    painter.drawText(QRect(16 , height() - 35 , width() - 30 , 22) , Qt::AlignLeft | Qt::AlignVCenter , _date_text);
+    painter.drawText(QRect(10 , height() - 35 , width() - 20 , 22) , Qt::AlignHCenter | Qt::AlignVCenter , _date_text);
 }
 
 void ClockWidget::_refresh() {

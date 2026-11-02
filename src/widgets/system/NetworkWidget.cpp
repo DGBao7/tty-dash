@@ -24,8 +24,9 @@ void NetworkWidget::paintEvent(QPaintEvent *event) {
     _paint_panel(painter , _title);
     painter.setFont(_font);
     painter.setPen(_text_color);
-    painter.drawText(QRect(16 , 36 , width() - 32 , 25) , Qt::AlignLeft | Qt::AlignVCenter , QStringLiteral("DOWN  %1").arg(_format_speed(_download_bytes_per_second)));
-    painter.drawText(QRect(16 , 67 , width() - 32 , 25) , Qt::AlignLeft | Qt::AlignVCenter , QStringLiteral("UP      %1").arg(_format_speed(_upload_bytes_per_second)));
+    const int line_height = qMax(18 , (height() - 36) / 2);
+    painter.drawText(QRect(16 , 34 , width() - 32 , line_height) , Qt::AlignLeft | Qt::AlignVCenter , QStringLiteral("DOWN  %1").arg(_format_speed(_download_bytes_per_second)));
+    painter.drawText(QRect(16 , 34 + line_height , width() - 32 , line_height) , Qt::AlignLeft | Qt::AlignVCenter , QStringLiteral("UP      %1").arg(_format_speed(_upload_bytes_per_second)));
     painter.setPen(_accent_color);
     painter.drawText(QRect(width() - 74 , 36 , 56 , 24) , Qt::AlignRight | Qt::AlignVCenter , QStringLiteral("NET"));
 }

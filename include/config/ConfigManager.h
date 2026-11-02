@@ -55,9 +55,9 @@ struct EffectsSettings {
 
 struct TerBonSettings {
     bool enabled = true;
-    bool visible_on_startup = true;
+    bool visible_on_startup = false;
     QString monitor = QStringLiteral("primary");
-    QString position = QStringLiteral("right");
+    QString position = QStringLiteral("custom");
     int width = 700;
     int height = 350;
     QString initial_working_directory = QStringLiteral("D:/");
@@ -69,7 +69,7 @@ struct TerBonSettings {
 };
 
 struct DashboardConfig {
-    int schema_version = 5;
+    int schema_version = 7;
     ApplicationSettings application;
     EffectsSettings effects;
     TerBonSettings terbon;

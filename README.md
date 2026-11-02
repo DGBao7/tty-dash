@@ -28,9 +28,9 @@ Global shortcuts:
 - `Ctrl+Alt+Q`: exit
 - `Ctrl+Alt+H`: hide or show dashboards
 - `Ctrl+Alt+R`: reload configuration
-- `Ctrl+Alt+I`: toggle click-through and widget editing
+- `Ctrl+Alt+I`: toggle click-through
 
-When interaction is enabled, drag a widget to move it and drag its lower-right corner to resize it. Geometry changes are saved to the writable JSON file.
+Dashboard widgets keep their configured positions and sizes. Drag the handle at the top of TerBon to move it, or use its lower-right grip to resize it. TerBon geometry is saved to the writable JSON file.
 
 ## Backdrop support
 

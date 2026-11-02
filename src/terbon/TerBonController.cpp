@@ -78,7 +78,7 @@ TerBonController::~TerBonController() {
 
 void TerBonController::_toggle_visibility() {
     if (!_settings.enabled) return;
-    _set_visible(!_window->isVisible() , true);
+    _set_visible(!_window->isVisible() , false);
 }
 
 void TerBonController::_apply_settings(const ttydash::TerBonSettings &settings) {

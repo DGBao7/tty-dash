@@ -3,9 +3,10 @@
 #include "utils/Logger.h"
 #include "widgets/DashboardWidget.h"
 #include "widgets/ascii/MatrixWidget.h"
-#include "widgets/ascii/PipesWidget.h"
 #include "widgets/clock/ClockWidget.h"
+#include "widgets/system/AudioVisualizerWidget.h"
 #include "widgets/system/CpuWidget.h"
+#include "widgets/system/DiskWidget.h"
 #include "widgets/system/NetworkWidget.h"
 #include "widgets/system/RamWidget.h"
 
@@ -18,8 +19,8 @@ WidgetManager::WidgetManager() {
     _register_widget(QStringLiteral("matrix") , [](const WidgetConfig &config , SystemMonitor * , QWidget *parent) {
         return new MatrixWidget(config , parent);
     });
-    _register_widget(QStringLiteral("pipes") , [](const WidgetConfig &config , SystemMonitor * , QWidget *parent) {
-        return new PipesWidget(config , parent);
+    _register_widget(QStringLiteral("audio_visualizer") , [](const WidgetConfig &config , SystemMonitor * , QWidget *parent) {
+        return new AudioVisualizerWidget(config , parent);
     });
     _register_widget(QStringLiteral("cpu") , [](const WidgetConfig &config , SystemMonitor *monitor , QWidget *parent) {
         return new CpuWidget(config , monitor , parent);
@@ -29,6 +30,9 @@ WidgetManager::WidgetManager() {
     });
     _register_widget(QStringLiteral("network") , [](const WidgetConfig &config , SystemMonitor *monitor , QWidget *parent) {
         return new NetworkWidget(config , monitor , parent);
+    });
+    _register_widget(QStringLiteral("disk") , [](const WidgetConfig &config , SystemMonitor * , QWidget *parent) {
+        return new DiskWidget(config , parent);
     });
 }
 

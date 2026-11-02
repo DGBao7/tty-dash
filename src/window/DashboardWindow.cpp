@@ -52,7 +52,7 @@ void DashboardWindow::_set_click_through(bool enabled) {
     _apply_flags();
     setGeometry(previous_geometry);
     for (DashboardWidget *widget : findChildren<DashboardWidget *>()) {
-        widget->_set_interaction_enabled(!_click_through_enabled);
+        widget->_set_interaction_enabled(false);
     }
 
     if (was_visible) {
@@ -129,7 +129,7 @@ void DashboardWindow::_apply_widget_layout(LayoutManager &layout_manager , Widge
         if (config != _display_config.widgets.cend()) {
             widget->setGeometry(layout_manager._widget_geometry(*config , QRect(0 , 0 , width() , height())));
         }
-        widget->_set_interaction_enabled(!_click_through_enabled);
+        widget->_set_interaction_enabled(false);
         connect(widget , &DashboardWidget::geometry_changed , this , [this](const QString &widget_id , const QRect &geometry) {
             emit widget_geometry_changed(_display_name , widget_id , geometry);
         });

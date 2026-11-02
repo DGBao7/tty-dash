@@ -1,5 +1,5 @@
 {
-  "schema_version": 5,
+  "schema_version": 7,
   "application": {
     "always_on_top": false,
     "click_through": true,
@@ -13,9 +13,9 @@
   },
   "terbon": {
     "enabled": true,
-    "visible_on_startup": true,
+    "visible_on_startup": false,
     "monitor": "primary",
-    "position": "right",
+    "position": "custom",
     "width": 700,
     "height": 350,
     "initial_working_directory": "D:/",
@@ -42,11 +42,11 @@
           "type": "clock",
           "enabled": true,
           "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
-          "size": { "width": 340, "height": 112 },
+          "size": { "width": 290, "height": 145 },
           "options": {
             "time_format": "HH:mm:ss",
             "date_format": "dddd, dd MMMM yyyy",
-            "display_font_size": 34
+            "display_font_size": 48
           }
         },
         {
@@ -74,20 +74,28 @@
           "options": { "speed_unit": "auto" }
         },
         {
+          "id": "disk",
+          "type": "disk",
+          "enabled": true,
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
+          "size": { "width": 290, "height": 112 },
+          "options": {}
+        },
+        {
           "id": "matrix",
           "type": "matrix",
           "enabled": true,
           "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
-          "size": { "width": 420, "height": 500 },
-          "options": { "animation_speed": 1.0, "density": 1.0, "interval_ms": 75 }
+          "size": { "width": 290, "height": 145 },
+          "options": { "animation_speed": 1.0, "density": 2.4, "interval_ms": 75 }
         },
         {
-          "id": "pipes",
-          "type": "pipes",
+          "id": "audio",
+          "type": "audio_visualizer",
           "enabled": true,
           "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
-          "size": { "width": 400, "height": 220 },
-          "options": { "animation_speed": 1.0, "interval_ms": 105 }
+          "size": { "width": 290, "height": 145 },
+          "options": {}
         }
       ]
     }

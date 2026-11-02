@@ -223,12 +223,13 @@ DashboardConfig ConfigManager::_default_config() const {
         display.widgets.append(widget);
     };
 
-    add_widget(QStringLiteral("clock") , QStringLiteral("clock") , 0 , 0 , 340 , 112 , QStringLiteral("adaptive_right"));
+    add_widget(QStringLiteral("clock") , QStringLiteral("clock") , 0 , 0 , 290 , 145 , QStringLiteral("adaptive_right"));
     add_widget(QStringLiteral("cpu") , QStringLiteral("cpu") , 0 , 0 , 290 , 112 , QStringLiteral("adaptive_right"));
     add_widget(QStringLiteral("ram") , QStringLiteral("ram") , 0 , 0 , 290 , 112 , QStringLiteral("adaptive_right"));
     add_widget(QStringLiteral("network") , QStringLiteral("network") , 0 , 0 , 290 , 112 , QStringLiteral("adaptive_right"));
-    add_widget(QStringLiteral("matrix") , QStringLiteral("matrix") , 0 , 0 , 420 , 500 , QStringLiteral("adaptive_right"));
-    add_widget(QStringLiteral("pipes") , QStringLiteral("pipes") , 0 , 0 , 400 , 220 , QStringLiteral("adaptive_right"));
+    add_widget(QStringLiteral("disk") , QStringLiteral("disk") , 0 , 0 , 290 , 112 , QStringLiteral("adaptive_right"));
+    add_widget(QStringLiteral("matrix") , QStringLiteral("matrix") , 0 , 0 , 290 , 145 , QStringLiteral("adaptive_right"));
+    add_widget(QStringLiteral("audio") , QStringLiteral("audio_visualizer") , 0 , 0 , 290 , 145 , QStringLiteral("adaptive_right"));
     config.displays.append(display);
 
     return config;
@@ -251,7 +252,7 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
     }
 
     const int schema_version = _integer(root , QStringLiteral("schema_version") , 1);
-    config.schema_version = 5;
+    config.schema_version = 7;
     config.extra = _without_keys(root , {QStringLiteral("schema_version") , QStringLiteral("application") , QStringLiteral("effects") , QStringLiteral("displays") , QStringLiteral("terbon")});
 
     const QJsonObject application = root.value(QStringLiteral("application")).toObject();
@@ -273,13 +274,14 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
     const QJsonObject terminal = root.value(QStringLiteral("terbon")).toObject();
     config.terbon.extra = _without_keys(terminal , {QStringLiteral("enabled") , QStringLiteral("visible_on_startup") , QStringLiteral("monitor") , QStringLiteral("position") , QStringLiteral("width") , QStringLiteral("height") , QStringLiteral("initial_working_directory") , QStringLiteral("remember_geometry") , QStringLiteral("has_saved_geometry") , QStringLiteral("x") , QStringLiteral("y")});
     config.terbon.enabled = terminal.value(QStringLiteral("enabled")).toBool(true);
-    config.terbon.visible_on_startup = terminal.value(QStringLiteral("visible_on_startup")).toBool(true);
+    config.terbon.visible_on_startup = terminal.value(QStringLiteral("visible_on_startup")).toBool(false);
     config.terbon.monitor = terminal.value(QStringLiteral("monitor")).toString(QStringLiteral("primary")).trimmed();
     if (config.terbon.monitor.isEmpty()) config.terbon.monitor = QStringLiteral("primary");
-    config.terbon.position = terminal.value(QStringLiteral("position")).toString(QStringLiteral("right")).toLower();
-    if (config.terbon.position != QStringLiteral("right") && config.terbon.position != QStringLiteral("custom")) config.terbon.position = QStringLiteral("right");
-    config.terbon.width = std::clamp(_integer(terminal , QStringLiteral("width") , 700) , 420 , 4000);
-    config.terbon.height = std::clamp(_integer(terminal , QStringLiteral("height") , 350) , 260 , 3000);
+    config.terbon.position = terminal.value(QStringLiteral("position")).toString(QStringLiteral("custom")).toLower();
+    if (config.terbon.position == QStringLiteral("left_column")) config.terbon.position = QStringLiteral("custom");
+    if (config.terbon.position != QStringLiteral("right") && config.terbon.position != QStringLiteral("custom")) config.terbon.position = QStringLiteral("custom");
+    config.terbon.width = 700;
+    config.terbon.height = 350;
     config.terbon.initial_working_directory = terminal.value(QStringLiteral("initial_working_directory")).toString(QStringLiteral("D:/")).trimmed();
     if (config.terbon.initial_working_directory.isEmpty()) config.terbon.initial_working_directory = QStringLiteral("D:/");
     config.terbon.remember_geometry = terminal.value(QStringLiteral("remember_geometry")).toBool(true);
@@ -411,6 +413,54 @@ bool ConfigManager::_parse(const QByteArray &json_data , DashboardConfig &config
         config.terbon.height = 350;
     }
 
+    if (schema_version < 7) {
+        config.terbon.visible_on_startup = false;
+        if (!config.terbon.has_saved_geometry) {
+            config.terbon.position = QStringLiteral("custom");
+            config.terbon.x = 0;
+            config.terbon.y = 0;
+        }
+        for (DisplayConfig &display : config.displays) {
+            bool has_disk = false;
+            bool has_visualizer = false;
+            for (WidgetConfig &widget : display.widgets) {
+                if (widget.type == QStringLiteral("pipes")) {
+                    widget.type = QStringLiteral("audio_visualizer");
+                    widget.id = QStringLiteral("audio");
+                    widget.position_mode = QStringLiteral("adaptive_right");
+                    widget.options = QJsonObject{};
+                    has_visualizer = true;
+                } else if (widget.type == QStringLiteral("audio_visualizer")) {
+                    has_visualizer = true;
+                } else if (widget.type == QStringLiteral("disk")) {
+                    has_disk = true;
+                }
+                if (widget.type == QStringLiteral("matrix")) {
+                    widget.position_mode = QStringLiteral("adaptive_right");
+                    widget.options.insert(QStringLiteral("density") , 2.4);
+                }
+                if (widget.type == QStringLiteral("clock")) {
+                    widget.position_mode = QStringLiteral("adaptive_right");
+                    widget.options.insert(QStringLiteral("display_font_size") , 48);
+                }
+                if (widget.type == QStringLiteral("cpu") || widget.type == QStringLiteral("ram") || widget.type == QStringLiteral("network")) {
+                    widget.position_mode = QStringLiteral("adaptive_right");
+                }
+            }
+            const auto add_fixed_widget = [&display](const QString &id , const QString &type , int width , int height) {
+                WidgetConfig widget;
+                widget.id = id;
+                widget.type = type;
+                widget.width = width;
+                widget.height = height;
+                widget.position_mode = QStringLiteral("adaptive_right");
+                display.widgets.append(widget);
+            };
+            if (!has_disk) add_fixed_widget(QStringLiteral("disk") , QStringLiteral("disk") , 290 , 112);
+            if (!has_visualizer) add_fixed_widget(QStringLiteral("audio") , QStringLiteral("audio_visualizer") , 290 , 145);
+        }
+    }
+
     return true;
 }
 
@@ -481,7 +531,7 @@ QByteArray ConfigManager::_serialize() const {
     }
 
     QJsonObject root = _config.extra;
-    root.insert(QStringLiteral("schema_version") , 5);
+    root.insert(QStringLiteral("schema_version") , 7);
     root.insert(QStringLiteral("application") , application);
     root.insert(QStringLiteral("effects") , effects);
     root.insert(QStringLiteral("displays") , displays);

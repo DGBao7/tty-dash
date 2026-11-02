@@ -21,8 +21,8 @@ private:
     QTimer _timer;
     QVector<qreal> _drops;
     QVector<int> _trail_lengths;
-    int _cell_width = 13;
-    int _cell_height = 17;
+    int _cell_width = 5;
+    int _cell_height = 8;
     qreal _speed = 1.0;
     qreal _density = 1.0;
     QString _glyphs = QStringLiteral("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&*+-<>");

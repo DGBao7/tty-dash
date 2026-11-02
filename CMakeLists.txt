@@ -46,6 +46,8 @@ add_executable(TtyDashboard WIN32
     include/widgets/system/CpuWidget.h
     include/widgets/system/RamWidget.h
     include/widgets/system/NetworkWidget.h
+    include/widgets/system/DiskWidget.h
+    include/widgets/system/AudioVisualizerWidget.h
     include/window/DashboardWindow.h
     include/window/WindowEffects.h
     resources/resources.qrc
@@ -76,6 +78,8 @@ add_executable(TtyDashboard WIN32
     src/widgets/system/CpuWidget.cpp
     src/widgets/system/RamWidget.cpp
     src/widgets/system/NetworkWidget.cpp
+    src/widgets/system/DiskWidget.cpp
+    src/widgets/system/AudioVisualizerWidget.cpp
     src/window/DashboardWindow.cpp
     src/window/WindowEffects.cpp
 )
@@ -102,6 +106,8 @@ target_link_libraries(TtyDashboard
         dwmapi
         iphlpapi
         user32
+        ole32
+        uuid
 )
 
 add_custom_command(TARGET TtyDashboard POST_BUILD

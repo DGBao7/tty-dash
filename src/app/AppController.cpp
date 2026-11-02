@@ -174,8 +174,8 @@ void AppController::_toggle_interaction() {
     }
     _config_manager._set_click_through(_click_through_enabled);
     Logger::_info(_click_through_enabled
-        ? QStringLiteral("Dashboard interaction disabled; click-through is active")
-        : QStringLiteral("Dashboard interaction enabled; drag widgets to move and resize"));
+        ? QStringLiteral("Click-through is active")
+        : QStringLiteral("Click-through is disabled"));
 }
 
 void AppController::_create_tray_icon() {
@@ -188,14 +188,14 @@ void AppController::_create_tray_icon() {
     QMenu *menu = new QMenu();
     _tray_menu = menu;
     QAction *visibility_action = menu->addAction(QStringLiteral("Hide dashboards"));
-    QAction *interaction_action = menu->addAction(QStringLiteral("Enable interaction"));
+    QAction *interaction_action = menu->addAction(QStringLiteral("Disable click-through"));
     QAction *terbon_action = menu->addAction(QStringLiteral("Show TerBon terminal"));
     QAction *reload_action = menu->addAction(QStringLiteral("Reload configuration"));
     menu->addSeparator();
     QAction *exit_action = menu->addAction(QStringLiteral("Exit"));
     QObject::connect(menu , &QMenu::aboutToShow , menu , [this , visibility_action , interaction_action , terbon_action]() {
         visibility_action->setText(_visible ? QStringLiteral("Hide dashboards") : QStringLiteral("Show dashboards"));
-        interaction_action->setText(_click_through_enabled ? QStringLiteral("Enable interaction") : QStringLiteral("Disable interaction"));
+        interaction_action->setText(_click_through_enabled ? QStringLiteral("Disable click-through") : QStringLiteral("Enable click-through"));
         terbon_action->setText(_terbon_controller && _terbon_controller->_visible() ? QStringLiteral("Hide TerBon terminal") : QStringLiteral("Show TerBon terminal"));
     });
 
@@ -205,7 +205,7 @@ void AppController::_create_tray_icon() {
     });
     QObject::connect(interaction_action , &QAction::triggered , &_application , [this , interaction_action]() {
         _toggle_interaction();
-        interaction_action->setText(_click_through_enabled ? QStringLiteral("Enable interaction") : QStringLiteral("Disable interaction"));
+        interaction_action->setText(_click_through_enabled ? QStringLiteral("Disable click-through") : QStringLiteral("Enable click-through"));
     });
     QObject::connect(terbon_action , &QAction::triggered , &_application , [this]() {
         if (_terbon_controller) _terbon_controller->_toggle_visibility();
