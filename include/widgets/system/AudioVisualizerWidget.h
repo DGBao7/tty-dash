@@ -23,7 +23,10 @@ private:
 
     QTimer _timer;
     IAudioMeterInformation *_meter = nullptr;
-    std::array<qreal , 16> _levels{};
+
+    static constexpr int bar_count = 16;
+    std::array<qreal , bar_count> _levels{};
+    
     qreal _peak = 0.0;
     quint64 _frame = 0;
     bool _owns_com_initialization = false;

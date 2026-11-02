@@ -6,6 +6,8 @@
 #include <QFont>
 #include <QVector>
 #include <QWidget>
+#include <QFontDatabase>
+#include <QCoreApplication>
 
 class QMouseEvent;
 class QPainter;
@@ -27,7 +29,10 @@ signals:
 protected:
     void _paint_panel(QPainter &painter , const QString &title) const;
     void _paint_graph(QPainter &painter , const QRectF &area , const QVector<qreal> &values , qreal max_value) const;
+    
     QFont _font;
+    QFont kultum_font;
+
     QColor _text_color;
     QColor _accent_color;
     QColor _panel_color;

@@ -21,7 +21,9 @@ private:
     QString _date_format;
     QString _time_text;
     QString _date_text;
-    int _display_font_size = 34;
+
+    int _display_font_size = 100;
+    int _date_font_size = 11;
 };
 
 }

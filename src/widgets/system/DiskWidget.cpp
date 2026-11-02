@@ -16,36 +16,111 @@ DiskWidget::DiskWidget(const WidgetConfig &config , QWidget *parent)
 
 void DiskWidget::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event)
+
     QPainter painter(this);
+
     _paint_panel(painter , _title);
+
     painter.setFont(_font);
     painter.setPen(_text_color);
-    painter.drawText(QRect(16 , 34 , width() - 32 , 26) , Qt::AlignLeft | Qt::AlignVCenter ,
-        QStringLiteral("%1  %2% USED").arg(_volume).arg(qRound(_used * 100.0)));
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(_panel_color.lighter(145));
-    const QRect track(16 , 68 , width() - 32 , 12);
-    painter.drawRoundedRect(track , 5 , 5);
-    painter.setBrush(_accent_color);
-    painter.drawRoundedRect(QRect(track.x() , track.y() , qRound(track.width() * _used) , track.height()) , 5 , 5);
-    painter.setPen(_accent_color);
-    painter.drawText(QRect(16 , 82 , width() - 32 , 18) , Qt::AlignLeft | Qt::AlignVCenter ,
-        QStringLiteral("%1 GiB TOTAL").arg(_total_gib , 0 , 'f' , 1));
+
+    if (_disks.isEmpty()) {
+        painter.drawText(
+            rect(),
+            Qt::AlignCenter,
+            QStringLiteral("NO DRIVE FOUND")
+        );
+
+        return;
+    }
+
+    const int row_height = 30;
+
+    for (int i = 0; i < _disks.size(); ++i) {
+        const DiskInfo &disk = _disks[i];
+
+        const int y = 34 + i * row_height;
+
+        painter.setPen(_text_color);
+
+        painter.drawText(
+            QRect(16 , y , width() - 32 , 16),
+            Qt::AlignLeft | Qt::AlignVCenter,
+            QStringLiteral("%1   %2%   %3 / %4 GiB")
+                .arg(disk.volume)
+                .arg(qRound(disk.used * 100.0))
+                .arg(disk.used_gib , 0 , 'f' , 1)
+                .arg(disk.total_gib , 0 , 'f' , 1)
+        );
+
+        const QRect track(16 , y + 19 , width() - 32 , 7);
+
+        painter.setPen(Qt::NoPen);
+
+        painter.setBrush(_panel_color.lighter(145));
+        painter.drawRoundedRect(track , 3 , 3);
+
+        painter.setBrush(_accent_color);
+
+        painter.drawRoundedRect(
+            QRect(
+                track.x(),
+                track.y(),
+                qRound(track.width() * disk.used),
+                track.height()
+            ),
+            3,
+            3
+        );
+    }
 }
 
 void DiskWidget::_refresh() {
-    const QStorageInfo storage = QStorageInfo::root();
-    if (storage.isReady() && storage.bytesTotal() > 0) {
+    QVector<DiskInfo> disks;
+
+    const QList<QStorageInfo> volumes = QStorageInfo::mountedVolumes();
+
+    for (const QStorageInfo &storage : volumes) {
+        if (!storage.isValid() || !storage.isReady()
+            || storage.bytesTotal() == 0) {
+            continue;
+        }
+
         const quint64 total = storage.bytesTotal();
-        const quint64 free = storage.bytesAvailable();
-        _used = qBound(0.0 , 1.0 - static_cast<qreal>(free) / static_cast<qreal>(total) , 1.0);
-        _total_gib = static_cast<qreal>(total) / (1024.0 * 1024.0 * 1024.0);
-        _volume = storage.rootPath();
-    } else {
-        _used = 0.0;
-        _total_gib = 0.0;
-        _volume = QStringLiteral("N/A");
+        const quint64 free = storage.bytesFree();
+
+        DiskInfo disk;
+
+        disk.volume = storage.rootPath();
+
+        if (disk.volume.endsWith('/') || disk.volume.endsWith('\\')) {
+            disk.volume.chop(1);
+        }
+
+        disk.used = qBound(
+            0.0,
+            1.0 - static_cast<qreal>(free) / static_cast<qreal>(total),
+            1.0
+        );
+
+        disk.total_gib = static_cast<qreal>(total)
+            / (1024.0 * 1024.0 * 1024.0);
+
+        disk.used_gib = disk.used * disk.total_gib;
+
+        disks.append(disk);
     }
+
+    std::sort(
+        disks.begin(),
+        disks.end(),
+        [](const DiskInfo &a , const DiskInfo &b) {
+            return a.volume < b.volume;
+        }
+    );
+
+    _disks = disks;
+
     update();
 }
 

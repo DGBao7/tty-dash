@@ -55,23 +55,19 @@ QRect LayoutManager::_widget_geometry(const WidgetConfig &config , const QRect &
 }
 
 QRect LayoutManager::_terbon_geometry(const TerBonSettings &config , const QRect &screen_geometry) const {
+    Q_UNUSED(config)
+
     if (screen_geometry.isEmpty()) return {};
+
     constexpr int width = 700;
     constexpr int height = 350;
-    QRect geometry;
-    if (config.remember_geometry && config.has_saved_geometry) {
-        geometry = QRect(config.x , config.y , width , height);
-    } else if (config.position == QStringLiteral("custom")) {
-        geometry = QRect(config.x , config.y , width , height);
-    } else {
-        geometry = QRect(screen_geometry.right() - width - 24 , screen_geometry.top() + (screen_geometry.height() - height) / 2 , width , height);
-    }
-    geometry.setSize(QSize(width , height));
-    const int max_x = std::max(screen_geometry.left() , screen_geometry.right() - width + 1);
-    const int max_y = std::max(screen_geometry.top() , screen_geometry.bottom() - height + 1);
-    geometry.moveLeft(std::clamp(geometry.left() , screen_geometry.left() , max_x));
-    geometry.moveTop(std::clamp(geometry.top() , screen_geometry.top() , max_y));
-    return geometry;
+
+    return QRect(
+        screen_geometry.left() + 4,
+        screen_geometry.top() + 4,
+        width,
+        height
+    );
 }
 
 QRect LayoutManager::_calculate(const QString &mode , int x , int y , int width , int height , const QMargins &margins , const QRect &bounds , bool fill_empty) const {

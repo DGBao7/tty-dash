@@ -11,8 +11,15 @@ namespace ttydash {
 MatrixWidget::MatrixWidget(const WidgetConfig &config , QWidget *parent)
     : DashboardWidget(config , parent) {
     _speed = qBound(0.2 , config.options.value(QStringLiteral("animation_speed")).toDouble(1.0) , 4.0);
-    _density = qBound(0.3 , config.options.value(QStringLiteral("density")).toDouble(1.0) , 2.5);
-    _cell_width = qMax(5 , qRound(13.0 / _density));
+
+    _density = qBound(
+        0.3 , 
+        config.options.value(
+            QStringLiteral("density")).toDouble(1.0) , 
+            2.5
+        );
+    _cell_width = qMax(9 , qRound(16.0 / _density));
+    
     const int interval = qBound(25 , config.options.value(QStringLiteral("interval_ms")).toInt(75) , 500);
     connect(&_timer , &QTimer::timeout , this , [this]() {
         _advance();

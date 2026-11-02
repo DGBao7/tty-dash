@@ -3,6 +3,8 @@
 #include "widgets/DashboardWidget.h"
 
 #include <QTimer>
+#include <QVector>
+#include <QString>
 
 namespace ttydash {
 
@@ -17,9 +19,15 @@ private:
     void _refresh();
 
     QTimer _timer;
-    QString _volume;
-    qreal _used = 0.0;
-    qreal _total_gib = 0.0;
+    
+    struct DiskInfo {
+        QString volume;
+        qreal used = 0.0;
+        qreal total_gib = 0.0;
+        qreal used_gib = 0.0;
+    };
+
+    QVector<DiskInfo> _disks;
 };
 
 }

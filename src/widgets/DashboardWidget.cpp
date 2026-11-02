@@ -26,8 +26,21 @@ DashboardWidget::DashboardWidget(const WidgetConfig &config , QWidget *parent)
 
     const QString family = config.options.value(QStringLiteral("font_family")).toString(QStringLiteral("Consolas"));
     const int size = qBound(8 , config.options.value(QStringLiteral("font_size")).toInt(11) , 48);
+    
     _font = QFont(family , size);
     _font.setStyleHint(QFont::Monospace);
+
+    const QString font_path =
+        QCoreApplication::applicationDirPath()
+        + QStringLiteral("/assets/fonts/Kultum_Ramadhan.otf");
+
+    const int font_id = QFontDatabase::addApplicationFont(font_path);
+
+    if (font_id >= 0) {
+        kultum_font = QFont(
+            QFontDatabase::applicationFontFamilies(font_id).value(0)
+        );
+    }
 
     setAttribute(Qt::WA_TranslucentBackground);
     setMouseTracking(true);
@@ -48,7 +61,7 @@ void DashboardWidget::_paint_panel(QPainter &painter , const QString &title) con
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(QPen(Theme::border , 1.0));
     painter.setBrush(_panel_color);
-    painter.drawRoundedRect(panel , 8.0 , 8.0);
+    painter.drawRoundedRect(panel , 4.0 , 4.0);
     painter.fillRect(QRectF(2.0 , 10.0 , 3.0 , height() - 20.0) , _accent_color);
 
     painter.setFont(_font);

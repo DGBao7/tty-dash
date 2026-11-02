@@ -64,7 +64,6 @@ void AudioVisualizerWidget::paintEvent(QPaintEvent *event) {
     _paint_panel(painter , _title);
     painter.setPen(Qt::NoPen);
 
-    constexpr int bar_count = 16;
     constexpr int gap = 4;
     const int top = 38;
     const int bottom = height() - 12;
@@ -84,20 +83,41 @@ void AudioVisualizerWidget::paintEvent(QPaintEvent *event) {
 
 void AudioVisualizerWidget::_sample_audio() {
     float measured_peak = 0.0F;
+
 #ifdef Q_OS_WIN
-    if (_meter) _meter->GetPeakValue(&measured_peak);
+    if (_meter) {
+        _meter->GetPeakValue(&measured_peak);
+    }
 #endif
-    _peak = std::clamp(static_cast<qreal>(measured_peak) , 0.0 , 1.0);
-    const qreal audible = qBound(0.0 , (_peak - 0.005) / 0.22 , 1.0);
+
+    _peak = std::clamp(static_cast<qreal>(measured_peak), 0.0, 1.0);
+
+    const qreal noise_gate = 0.06;
+    const qreal audible = qBound(
+        0.0,
+        (_peak - noise_gate) / 0.44,
+        1.0
+    );
+
     ++_frame;
 
     for (int index = 0; index < static_cast<int>(_levels.size()); ++index) {
-        const qreal wave = 0.18 + 0.82 * std::abs(std::sin(static_cast<qreal>(_frame) * 0.11 + index * 0.57));
+        const qreal wave = 0.30 + 0.70 * std::abs(
+            std::sin(static_cast<qreal>(_frame) * 0.11 + index * 0.57)
+        );
+
         const qreal target = audible * wave;
-        _levels[static_cast<size_t>(index)] = target > _levels[static_cast<size_t>(index)]
-            ? target
-            : _levels[static_cast<size_t>(index)] * 0.88;
+        qreal &level = _levels[static_cast<size_t>(index)];
+
+        const qreal smoothing = target > level ? 0.22 : 0.10;
+
+        level += (target - level) * smoothing;
+
+        if (level < 0.002) {
+            level = 0.0;
+        }
     }
+
     update();
 }
 

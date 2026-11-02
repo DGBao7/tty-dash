@@ -9,7 +9,15 @@ ClockWidget::ClockWidget(const WidgetConfig &config , QWidget *parent)
     : DashboardWidget(config , parent) {
     _time_format = config.options.value(QStringLiteral("time_format")).toString(QStringLiteral("HH:mm:ss"));
     _date_format = config.options.value(QStringLiteral("date_format")).toString(QStringLiteral("dddd, dd MMMM yyyy"));
-    _display_font_size = qBound(16 , config.options.value(QStringLiteral("display_font_size")).toInt(34) , 72);
+
+    const int original_font_size = qBound(
+        16,
+        config.options.value(QStringLiteral("display_font_size")).toInt(34),
+        72
+    );
+
+    _date_font_size = qMax(10, original_font_size / 3);
+
     connect(&_timer , &QTimer::timeout , this , [this]() {
         _refresh();
     });
@@ -22,15 +30,15 @@ void ClockWidget::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     _paint_panel(painter , _title);
 
-    QFont display_font = _font;
+    QFont display_font = kultum_font;
     display_font.setPixelSize(_display_font_size);
     display_font.setBold(true);
     painter.setFont(display_font);
     painter.setPen(_text_color);
-    painter.drawText(QRect(10 , 34 , width() - 20 , 58) , Qt::AlignHCenter | Qt::AlignVCenter , _time_text);
+    painter.drawText(QRect(10 , 100 , width() - 20 , 100) , Qt::AlignHCenter | Qt::AlignVCenter , _time_text);
 
     QFont date_font = _font;
-    date_font.setPixelSize(qMax(10 , _display_font_size / 3));
+    date_font.setPixelSize(_date_font_size);
     painter.setFont(date_font);
     painter.setPen(_accent_color);
     painter.drawText(QRect(10 , height() - 35 , width() - 20 , 22) , Qt::AlignHCenter | Qt::AlignVCenter , _date_text);
