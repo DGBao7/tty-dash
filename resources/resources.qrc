@@ -9,4 +9,7 @@
     <qresource prefix="/terbon">
         <file alias="bon.ico">terbon/bon.ico</file>
     </qresource>
+    <qresource prefix="/assets/fonts">
+        <file alias="Kultum_Ramadhan.otf">../assets/fonts/Kultum_Ramadhan.otf</file>
+    </qresource>
 </RCC>

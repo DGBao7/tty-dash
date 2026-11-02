@@ -31,8 +31,7 @@ DashboardWidget::DashboardWidget(const WidgetConfig &config , QWidget *parent)
     _font.setStyleHint(QFont::Monospace);
 
     const QString font_path =
-        QCoreApplication::applicationDirPath()
-        + QStringLiteral("/assets/fonts/Kultum_Ramadhan.otf");
+        QStringLiteral(":/assets/fonts/Kultum_Ramadhan.otf");
 
     const int font_id = QFontDatabase::addApplicationFont(font_path);
 
