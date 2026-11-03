@@ -1,0 +1,5 @@
+D:/works/prjs/pro/tty-dash/build/CMakeFiles/TtyDashboard.dir
+D:/works/prjs/pro/tty-dash/build/CMakeFiles/edit_cache.dir
+D:/works/prjs/pro/tty-dash/build/CMakeFiles/rebuild_cache.dir
+D:/works/prjs/pro/tty-dash/build/CMakeFiles/TtyDashboard_autogen_timestamp_deps.dir
+D:/works/prjs/pro/tty-dash/build/CMakeFiles/TtyDashboard_autogen.dir

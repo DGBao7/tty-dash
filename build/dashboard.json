@@ -1,0 +1,133 @@
+{
+  "schema_version": 7,
+  "application": {
+    "always_on_top": false,
+    "click_through": true,
+    "opacity": 1.0,
+    "monitoring_interval_ms": 1500
+  },
+  "effects": {
+    "blur": false,
+    "backdrop": "none",
+    "background_color": "#00000000"
+  },
+  "terbon": {
+    "enabled": true,
+    "visible_on_startup": false,
+    "monitor": "primary",
+    "position": "custom",
+    "width": 700,
+    "height": 350,
+    "initial_working_directory": "D:/",
+    "remember_geometry": true,
+    "has_saved_geometry": false
+  },
+  "displays": [
+    {
+      "name": "primary",
+      "position_mode": "top_left",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "margins": {
+        "left": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "widgets": [
+        {
+          "id": "clock",
+          "type": "clock",
+          "enabled": true,
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
+          "size": { "width": 290, "height": 145 },
+          "options": {
+            "time_format": "HH:mm:ss",
+            "date_format": "dddd, dd MMMM yyyy",
+            "display_font_size": 48
+          }
+        },
+        {
+          "id": "cpu",
+          "type": "cpu",
+          "enabled": true,
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
+          "size": { "width": 290, "height": 112 },
+          "options": { "show_graph": true }
+        },
+        {
+          "id": "ram",
+          "type": "ram",
+          "enabled": true,
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
+          "size": { "width": 290, "height": 112 },
+          "options": { "show_graph": true }
+        },
+        {
+          "id": "network",
+          "type": "network",
+          "enabled": true,
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
+          "size": { "width": 290, "height": 112 },
+          "options": { "speed_unit": "auto" }
+        },
+        {
+          "id": "disk",
+          "type": "disk",
+          "enabled": true,
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
+          "size": { "width": 290, "height": 112 },
+          "options": {}
+        },
+        {
+          "id": "matrix",
+          "type": "matrix",
+          "enabled": true,
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
+          "size": { "width": 290, "height": 145 },
+          "options": { "animation_speed": 1.0, "density": 2.4, "interval_ms": 75 }
+        },
+        {
+          "id": "audio",
+          "type": "audio_visualizer",
+          "enabled": true,
+          "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
+          "size": { "width": 290, "height": 145 },
+          "options": {}
+        } ,
+        {
+          "id": "quick-launch",
+          "type": "quick_launch",
+          "enabled": true,
+          "position": {
+              "mode": "adaptive_right",
+              "x": 0,
+              "y": 0
+          },
+          "size": {
+              "width": 290,
+              "height": 145
+          },
+          "options": {}
+        } ,
+        {
+          "id": "live-windows",
+          "type": "live_windows",
+          "enabled": true,
+          "position": {
+              "mode": "adaptive_right" ,
+              "x" : 0 ,
+              "y" : 0
+          } ,
+          "size": {
+              "width": 290,
+              "height": 145
+          } ,
+          "options": {}
+        }
+      ]
+    }
+  ]
+}

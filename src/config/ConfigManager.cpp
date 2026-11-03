@@ -71,9 +71,21 @@ QJsonObject _without_keys(const QJsonObject &source , const QStringList &keys) {
 
 ConfigManager::ConfigManager() {
     _config_path = qEnvironmentVariable("TTY_DASH_CONFIG");
+
     if (_config_path.isEmpty()) {
-        _config_path = QDir(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation))
-            .filePath(QStringLiteral("dashboard.json"));
+        const QString executable_config = QDir(
+            QCoreApplication::applicationDirPath()
+        ).filePath(QStringLiteral("configs/dashboard.json"));
+
+        if (QFileInfo::exists(executable_config)) {
+            _config_path = executable_config;
+        } else {
+            _config_path = QDir(
+                QStandardPaths::writableLocation(
+                    QStandardPaths::AppConfigLocation
+                )
+            ).filePath(QStringLiteral("dashboard.json"));
+        }
     }
 }
 
@@ -85,7 +97,8 @@ DashboardConfig ConfigManager::_load() {
         contents = file.readAll();
         file.close();
     } else {
-        const QString portable_path = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("dashboard.json"));
+        const QString portable_path = QDir(QCoreApplication::applicationDirPath())
+            .filePath(QStringLiteral("configs/dashboard.json"));
         QFile portable(portable_path);
         if (portable.open(QIODevice::ReadOnly)) {
             _config_path = portable_path;
@@ -120,8 +133,10 @@ DashboardConfig ConfigManager::_load() {
 bool ConfigManager::_save() {
     const QByteArray data = _serialize();
     QString failure;
+
     const auto write_to_path = [&data , &failure](const QString &path) {
         const QFileInfo info(path);
+
         if (!QDir().mkpath(info.absolutePath())) {
             failure = QStringLiteral("could not create directory %1").arg(info.absolutePath());
 
@@ -129,11 +144,13 @@ bool ConfigManager::_save() {
         }
 
         QSaveFile file(path);
+
         if (!file.open(QIODevice::WriteOnly)) {
             failure = file.errorString();
 
             return false;
         }
+
         if (file.write(data) != data.size() || !file.commit()) {
             failure = file.errorString();
 
@@ -147,17 +164,31 @@ bool ConfigManager::_save() {
         return true;
     }
 
-    Logger::_warning(QStringLiteral("Could not save configuration to %1: %2; trying a portable location")
-        .arg(_config_path , failure));
-    const QString portable_path = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("dashboard.json"));
-    if (portable_path != _config_path && write_to_path(portable_path)) {
-        _config_path = portable_path;
-        Logger::_info(QStringLiteral("Using portable configuration at %1").arg(_config_path));
+    Logger::_warning(
+        QStringLiteral("Could not save configuration to %1: %2; trying AppData")
+            .arg(_config_path , failure)
+    );
+
+    const QString user_config_path = QDir(
+        QStandardPaths::writableLocation(
+            QStandardPaths::AppConfigLocation
+        )
+    ).filePath(QStringLiteral("dashboard.json"));
+
+    if (user_config_path != _config_path && write_to_path(user_config_path)) {
+        _config_path = user_config_path;
+
+        Logger::_info(
+            QStringLiteral("Using user configuration at %1").arg(_config_path)
+        );
 
         return true;
     }
 
-    Logger::_error(QStringLiteral("Could not save configuration to a writable location: %1").arg(failure));
+    Logger::_error(
+        QStringLiteral("Could not save configuration to a writable location: %1")
+            .arg(failure)
+    );
 
     return false;
 }
@@ -209,10 +240,20 @@ QString ConfigManager::_path() const {
 DashboardConfig ConfigManager::_default_config() const {
     DashboardConfig config;
     DisplayConfig display;
+
     display.name = QStringLiteral("primary");
 
-    const auto add_widget = [&display](const QString &id , const QString &type , int x , int y , int width , int height , const QString &mode = QStringLiteral("custom")) {
+    const auto add_widget = [&display](
+        const QString &id,
+        const QString &type,
+        int x,
+        int y,
+        int width,
+        int height,
+        const QString &mode = QStringLiteral("custom")
+    ) {
         WidgetConfig widget;
+
         widget.id = id;
         widget.type = type;
         widget.x = x;
@@ -220,6 +261,7 @@ DashboardConfig ConfigManager::_default_config() const {
         widget.width = width;
         widget.height = height;
         widget.position_mode = mode;
+
         display.widgets.append(widget);
     };
 
@@ -230,6 +272,8 @@ DashboardConfig ConfigManager::_default_config() const {
     add_widget(QStringLiteral("disk") , QStringLiteral("disk") , 0 , 0 , 290 , 112 , QStringLiteral("adaptive_right"));
     add_widget(QStringLiteral("matrix") , QStringLiteral("matrix") , 0 , 0 , 290 , 145 , QStringLiteral("adaptive_right"));
     add_widget(QStringLiteral("audio") , QStringLiteral("audio_visualizer") , 0 , 0 , 290 , 145 , QStringLiteral("adaptive_right"));
+    add_widget(QStringLiteral("quick-launch") , QStringLiteral("quick_launch") , 0 , 0 , 290 , 145 , QStringLiteral("adaptive_right"));
+
     config.displays.append(display);
 
     return config;

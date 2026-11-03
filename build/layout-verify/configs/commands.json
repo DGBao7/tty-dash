@@ -1,0 +1,127 @@
+{
+    "ope": 
+    {
+        "name": "open",
+        "app": "allow",
+        "url": "allow",
+        "fil": "allow",
+        "fol": "allow" ,
+        "len" : 3 ,
+        "note" : "ope <target> <argument>"
+    },
+
+    
+
+    "cre": 
+    {
+        "name": "create",
+        "fil": "allow",
+        "fol": "allow" ,
+        "len" : 3 ,
+        "note" : "cre <target> <argument>"
+    },
+
+    "del": 
+    {
+        "name": "delete",
+        "fil": "confirm",
+        "fol": "confirm",
+        "app": "forbidden",
+        "url": "forbidden" ,
+        "len" :  3,
+        "note" : "del <target> <argument>"
+    } ,
+    "sea": 
+    {
+        "name": "search",
+        "fil": "allow",
+        "fol": "allow" ,
+        "len" : 3 ,
+        "note" : "sea <target> <argument>"
+    },
+    "run": 
+    {
+        "name": "run",
+        "cpp": "allow",
+        "py": "allow",
+        "exe": "allow" ,
+        "js" : "allow" ,
+        "len" : 3 ,
+        "note" : "run <target> <argument>"
+
+    },
+
+    "bui": 
+    {
+        "name": "build",
+        "cpp": "allow" ,
+        "len" : 5 ,
+        "note" : "bui <target> <argument> -- <source files>"
+    },
+
+    "ana": 
+    {
+        "name": "analyze",
+        "fil": "allow",
+        "len" : 3 ,
+        "note" : "ana <target> <argument>"
+    },
+
+    "for": 
+    {
+        "name": "format" ,
+        "cpp": "allow" ,
+        "py": "allow" ,
+        "len" : 3 ,
+        "note" : "for <target> <argument>"
+    } ,
+
+    "cle": 
+    {
+        "name": "clear",
+        "len" : 1 ,
+        "note" : "cle"
+    } ,
+
+    "cd" :
+    {
+        "name" : "cd" ,
+        "len" : 2 ,
+        "note" : "cd <path/child file>"
+    } ,
+
+    "pwd" :
+    {
+        "name" : "print working directory" ,
+        "len" : 1 ,
+        "note" : "pwd"
+    } ,
+
+    "dir" :
+    {
+        "name" : "direction" ,
+        "len" : 1 ,
+        "note" : "dir"
+    } ,
+
+    "tre" :
+    {
+        "name" : "tree" ,
+        "len" : 2 ,
+        "note" : "tree <depth>"
+    } ,
+    
+    "help" :
+    {
+        "name" : "help" ,
+        "len" : 1 ,
+        "note" : "help"
+    } ,
+
+    "the" :
+    {
+        "name" : "themes" ,
+        "len" : 2 ,
+        "note" : "the <themes>"
+    }
+}

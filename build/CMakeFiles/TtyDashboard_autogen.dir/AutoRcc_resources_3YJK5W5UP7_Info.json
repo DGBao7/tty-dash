@@ -1,0 +1,29 @@
+{
+	"BUILD_DIR" : "D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen",
+	"CMAKE_BINARY_DIR" : "D:/works/prjs/pro/tty-dash/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "D:/works/prjs/pro/tty-dash/build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "D:/works/prjs/pro/tty-dash",
+	"CMAKE_SOURCE_DIR" : "D:/works/prjs/pro/tty-dash",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include",
+	"INPUTS" : 
+	[
+		"D:/works/prjs/pro/tty-dash/resources/themes/Dark.qss",
+		"D:/works/prjs/pro/tty-dash/resources/terbon/bon.ico",
+		"D:/works/prjs/pro/tty-dash/configs/commands.json",
+		"D:/works/prjs/pro/tty-dash/configs/dashboard.json",
+		"D:/works/prjs/pro/tty-dash/assets/fonts/Kultum_Ramadhan.otf"
+	],
+	"LOCK_FILE" : "D:/works/prjs/pro/tty-dash/build/CMakeFiles/TtyDashboard_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "3YJK5W5UP7",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "D:/works/tools/msys2/mingw64/share/qt6/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "D:/works/prjs/pro/tty-dash/build/CMakeFiles/TtyDashboard_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Used.txt",
+	"SOURCE" : "D:/works/prjs/pro/tty-dash/resources/resources.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}
