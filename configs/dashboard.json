@@ -96,6 +96,36 @@
           "position": { "mode": "adaptive_right", "x": 0, "y": 0 },
           "size": { "width": 290, "height": 145 },
           "options": {}
+        } ,
+        {
+          "id": "quick-launch",
+          "type": "quick_launch",
+          "enabled": true,
+          "position": {
+              "mode": "adaptive_right",
+              "x": 0,
+              "y": 0
+          },
+          "size": {
+              "width": 290,
+              "height": 145
+          },
+          "options": {}
+        } ,
+        {
+          "id": "live-windows",
+          "type": "live_windows",
+          "enabled": true,
+          "position": {
+              "mode": "adaptive_right" ,
+              "x" : 0 ,
+              "y" : 0
+          } ,
+          "size": {
+              "width": 290,
+              "height": 145
+          } ,
+          "options": {}
         }
       ]
     }

@@ -1,14 +1,20 @@
 #include "widgets/WidgetManager.h"
 
 #include "utils/Logger.h"
+
 #include "widgets/DashboardWidget.h"
+
 #include "widgets/ascii/MatrixWidget.h"
+
 #include "widgets/clock/ClockWidget.h"
+
 #include "widgets/system/AudioVisualizerWidget.h"
 #include "widgets/system/CpuWidget.h"
 #include "widgets/system/DiskWidget.h"
 #include "widgets/system/NetworkWidget.h"
 #include "widgets/system/RamWidget.h"
+
+#include "widgets/launch/QuickLaunchWidget.h"
 
 namespace ttydash {
 
@@ -33,6 +39,9 @@ WidgetManager::WidgetManager() {
     });
     _register_widget(QStringLiteral("disk") , [](const WidgetConfig &config , SystemMonitor * , QWidget *parent) {
         return new DiskWidget(config , parent);
+    });
+    _register_widget(QStringLiteral("quick_launch") , [](const WidgetConfig &config , SystemMonitor * , QWidget *parent) {
+        return new QuickLaunchWidget(config , parent);
     });
 }
 

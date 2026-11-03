@@ -17,7 +17,7 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Widgets)
 
-add_executable(TtyDashboard WIN32
+add_executable(TtyDashboard
     include/app/AppController.h
     include/config/ConfigManager.h
     include/display/DisplayManager.h
@@ -50,6 +50,8 @@ add_executable(TtyDashboard WIN32
     include/widgets/system/AudioVisualizerWidget.h
     include/window/DashboardWindow.h
     include/window/WindowEffects.h
+    include/widgets/launch/QuickLaunchWidget.h
+    src/widgets/launch/QuickLaunchWidget.cpp
     resources/resources.qrc
     src/main.cpp
     src/app/AppController.cpp

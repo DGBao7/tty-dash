@@ -3,9 +3,11 @@
 #include <algorithm>
 namespace {
 constexpr qreal empty_left_column_share = 0.30;
-constexpr qreal center_column_share = 0.55;
+constexpr qreal center_column_share = 0.30;
+
 constexpr qreal center_row_shares[]{0.32 , 0.24 , 0.18 , 0.26};
 constexpr qreal right_row_shares[]{0.32 , 0.33 , 0.35};
+constexpr qreal left_row_shares[]{0.50 , 0.50};
 
 int _empty_left_column_width(int screen_width) {
     return qRound(screen_width * empty_left_column_share);
@@ -23,30 +25,75 @@ QRect LayoutManager::_widget_geometry(const WidgetConfig &config , const QRect &
 
     if (config.position_mode == QStringLiteral("adaptive_right")) {
         const QString type = config.type.toLower();
-        const QStringList center_types{QStringLiteral("cpu") , QStringLiteral("ram") , QStringLiteral("network") , QStringLiteral("disk")};
-        const QStringList right_types{QStringLiteral("clock") , QStringLiteral("matrix") , QStringLiteral("audio_visualizer")};
-        const int row = center_types.indexOf(type) >= 0 ? center_types.indexOf(type) : right_types.indexOf(type);
-        if (row < 0) return _calculate(QStringLiteral("custom") , config.x , config.y , config.width , config.height , config.margins , local_bounds , false);
+
+        const QStringList left_types{
+            QStringLiteral("quick_launch"),
+            QStringLiteral("live_windows")
+        };
+
+        const QStringList center_types{
+            QStringLiteral("cpu"),
+            QStringLiteral("ram"),
+            QStringLiteral("network"),
+            QStringLiteral("disk")
+        };
+
+        const QStringList right_types{
+            QStringLiteral("clock"),
+            QStringLiteral("matrix"),
+            QStringLiteral("audio_visualizer")
+        };
+
+        const int left_row = left_types.indexOf(type);
+        const int center_row = center_types.indexOf(type);
+        const int right_row = right_types.indexOf(type);
+
+        if (left_row < 0 && center_row < 0 && right_row < 0) {
+            return _calculate(QStringLiteral("custom") , config.x , config.y , config.width , config.height , config.margins , local_bounds , false);
+        }
+
+        const bool left = left_row >= 0;
+        const bool center = center_row >= 0;
+
+        const int row = left ? left_row : (center ? center_row : right_row);
 
         const int left_width = _empty_left_column_width(local_bounds.width());
-        const int center_width = qRound((local_bounds.width() - left_width) * center_column_share);
+        const int center_width = qRound(local_bounds.width() * center_column_share);
+
         const int gap = 4;
-        const bool center = center_types.contains(type);
-        const int column_x = center ? left_width : left_width + center_width;
-        const int column_width = center ? center_width : local_bounds.width() - left_width - center_width;
+
+        const int column_x = left ? 0 : (center ? left_width : left_width + center_width);
+
+        const int column_width = left
+            ? left_width
+            : (center ? center_width : local_bounds.width() - left_width - center_width);
+
         const int column_gap = std::min(gap , std::max(0 , column_width - 1));
+
         const int inner_x = column_x + column_gap / 2;
         const int inner_width = std::max(1 , column_width - column_gap);
-        const int row_count = center ? 4 : 3;
-        const int row_gap = center ? 2 : gap;
+
+        const int row_count = left ? 2 : (center ? 4 : 3);
+        const int row_gap = left ? 4 : (center ? 2 : gap);
+
         const int content_height = std::max(1 , local_bounds.height() - row_gap * (row_count - 1));
-        const qreal *row_shares = center ? center_row_shares : right_row_shares;
+
+        const qreal *row_shares = left
+            ? left_row_shares
+            : (center ? center_row_shares : right_row_shares);
+
         int y = 0;
+
         for (int previous_row = 0; previous_row < row; ++previous_row) {
             y += qRound(content_height * row_shares[previous_row]) + row_gap;
         }
+
         const int row_height = std::max(32 , qRound(content_height * row_shares[row]));
-        const int height = row == row_count - 1 ? std::max(32 , local_bounds.height() - y) : row_height;
+
+        const int height = row == row_count - 1
+            ? std::max(32 , local_bounds.height() - y)
+            : row_height;
+
         return QRect(inner_x , y , inner_width , height);
 
     }
