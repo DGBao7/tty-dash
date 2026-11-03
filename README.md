@@ -14,6 +14,10 @@ TTY Dashboard is a native desktop utility built with **C++20**, **Qt 6**, and th
 - **Click-through mode** — let mouse clicks pass through the dashboard, then switch to interactive mode whenever you need to rearrange widgets.
 - **Window controls** — optional always-on-top behavior, adjustable opacity, and translucent backgrounds.
 - **System tray controls** — show or hide dashboards, toggle click-through, open TerBon, reload settings, or exit from the tray menu.
+- **Quick Launch** — provides shortcuts to toggle the built-in TerBon window, open the Windows default browser, launch Visual Studio Code, open File Explorer, and launch GitHub Desktop.
+- **Live Windows** — displays thumbnail previews of currently open application windows. Select a preview to bring the corresponding window to the foreground.
+
+The left dashboard column is divided into two stacked sections: Quick Launch on top and Live Windows below.
 
 ### Built-in Widgets
 
@@ -26,6 +30,7 @@ TTY Dashboard is a native desktop utility built with **C++20**, **Qt 6**, and th
 | Disk | Storage information for connected drives. |
 | Audio Visualizer | Visualizes the current system audio output level. It is **not** a music player. |
 | Matrix | Animated Matrix-style visual effect. |
+| Live Windows | Displays live thumbnail previews of open application windows and allows users to activate them. |
 
 Widget positions, dimensions, visibility, and supported display options are configurable through `dashboard.json`.
 
