@@ -1,7 +1,7 @@
 {
     "application": {
         "always_on_top": false,
-        "click_through": false,
+        "click_through": true,
         "monitoring_interval_ms": 1500,
         "opacity": 1
     },
@@ -238,7 +238,7 @@
     "schema_version": 7,
     "terbon": {
         "enabled": true,
-        "has_saved_geometry": true,
+        "has_saved_geometry": false,
         "height": 350,
         "initial_working_directory": "D:/",
         "monitor": "primary",
@@ -246,7 +246,7 @@
         "remember_geometry": true,
         "visible_on_startup": false,
         "width": 700,
-        "x": 539,
-        "y": 118
+        "x": 0,
+        "y": 0
     }
 }

@@ -16,6 +16,8 @@
 
 #include "widgets/launch/QuickLaunchWidget.h"
 
+#include "widgets/live/LiveWindowsWidget.h"
+
 namespace ttydash {
 
 WidgetManager::WidgetManager() {
@@ -42,6 +44,9 @@ WidgetManager::WidgetManager() {
     });
     _register_widget(QStringLiteral("quick_launch") , [](const WidgetConfig &config , SystemMonitor * , QWidget *parent) {
         return new QuickLaunchWidget(config , parent);
+    });
+    _register_widget(QStringLiteral("live_windows") , [](const WidgetConfig &config , SystemMonitor * , QWidget *parent) {
+        return new LiveWindowsWidget(config , parent);
     });
 }
 

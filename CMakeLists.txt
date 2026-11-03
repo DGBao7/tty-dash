@@ -25,7 +25,7 @@ configure_file(
     COPYONLY
 )
 
-add_executable(TtyDashboard
+add_executable(TtyDashboard WIN32
     include/app/AppController.h
     include/config/ConfigManager.h
     include/display/DisplayManager.h
@@ -59,6 +59,8 @@ add_executable(TtyDashboard
     include/window/DashboardWindow.h
     include/window/WindowEffects.h
     include/widgets/launch/QuickLaunchWidget.h
+    include/widgets/live/LiveWindowsWidget.h
+    src/widgets/live/LiveWindowsWidget.cpp
     src/widgets/launch/QuickLaunchWidget.cpp
     resources/resources.qrc
     src/main.cpp

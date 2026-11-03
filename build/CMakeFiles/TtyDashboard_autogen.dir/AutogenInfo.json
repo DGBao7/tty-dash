@@ -435,6 +435,12 @@
 			null
 		],
 		[
+			"D:/works/prjs/pro/tty-dash/include/widgets/live/LiveWindowsWidget.h",
+			"Mu",
+			"3X3OF7HRRM/moc_LiveWindowsWidget.cpp",
+			null
+		],
+		[
 			"D:/works/prjs/pro/tty-dash/include/widgets/system/AudioVisualizerWidget.h",
 			"Mu",
 			"O757PUSO64/moc_AudioVisualizerWidget.cpp",
@@ -486,6 +492,7 @@
 		"NOMINMAX",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
+		"QT_NEEDS_QMAIN",
 		"QT_NO_DEBUG",
 		"QT_WIDGETS_LIB",
 		"UNICODE",
@@ -636,6 +643,11 @@
 		],
 		[
 			"D:/works/prjs/pro/tty-dash/src/widgets/launch/QuickLaunchWidget.cpp",
+			"Mu",
+			null
+		],
+		[
+			"D:/works/prjs/pro/tty-dash/src/widgets/live/LiveWindowsWidget.cpp",
 			"Mu",
 			null
 		],

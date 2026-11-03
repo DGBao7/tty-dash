@@ -24,6 +24,7 @@
 #define __cpp_static_assert 201411L
 #define __BFLT16_MIN_10_EXP__ (-37)
 #define __cpp_inheriting_constructors 201511L
+#define QT_NEEDS_QMAIN 1
 #define QT_GUI_LIB 1
 #define __ORDER_LITTLE_ENDIAN__ 1234
 #define __WCHAR_MAX__ 0xffff

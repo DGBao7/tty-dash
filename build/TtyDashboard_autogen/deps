@@ -31,6 +31,7 @@ TtyDashboard_autogen/timestamp: \
 	D:/works/prjs/pro/tty-dash/include/widgets/ascii/PipesWidget.h \
 	D:/works/prjs/pro/tty-dash/include/widgets/clock/ClockWidget.h \
 	D:/works/prjs/pro/tty-dash/include/widgets/launch/QuickLaunchWidget.h \
+	D:/works/prjs/pro/tty-dash/include/widgets/live/LiveWindowsWidget.h \
 	D:/works/prjs/pro/tty-dash/include/widgets/system/AudioVisualizerWidget.h \
 	D:/works/prjs/pro/tty-dash/include/widgets/system/CpuWidget.h \
 	D:/works/prjs/pro/tty-dash/include/widgets/system/DiskWidget.h \
@@ -64,6 +65,7 @@ TtyDashboard_autogen/timestamp: \
 	D:/works/prjs/pro/tty-dash/src/widgets/ascii/PipesWidget.cpp \
 	D:/works/prjs/pro/tty-dash/src/widgets/clock/ClockWidget.cpp \
 	D:/works/prjs/pro/tty-dash/src/widgets/launch/QuickLaunchWidget.cpp \
+	D:/works/prjs/pro/tty-dash/src/widgets/live/LiveWindowsWidget.cpp \
 	D:/works/prjs/pro/tty-dash/src/widgets/system/AudioVisualizerWidget.cpp \
 	D:/works/prjs/pro/tty-dash/src/widgets/system/CpuWidget.cpp \
 	D:/works/prjs/pro/tty-dash/src/widgets/system/DiskWidget.cpp \
@@ -358,6 +360,7 @@ TtyDashboard_autogen/timestamp: \
 	D:/works/tools/msys2/mingw64/include/qt6/QtCore/QAbstractNativeEventFilter \
 	D:/works/tools/msys2/mingw64/include/qt6/QtCore/QCoreApplication \
 	D:/works/tools/msys2/mingw64/include/qt6/QtCore/QElapsedTimer \
+	D:/works/tools/msys2/mingw64/include/qt6/QtCore/QHash \
 	D:/works/tools/msys2/mingw64/include/qt6/QtCore/QJsonObject \
 	D:/works/tools/msys2/mingw64/include/qt6/QtCore/QList \
 	D:/works/tools/msys2/mingw64/include/qt6/QtCore/QMargins \
@@ -579,15 +582,24 @@ TtyDashboard_autogen/timestamp: \
 	D:/works/tools/msys2/mingw64/include/qt6/QtGui/qvectornd.h \
 	D:/works/tools/msys2/mingw64/include/qt6/QtGui/qwindowdefs.h \
 	D:/works/tools/msys2/mingw64/include/qt6/QtGui/qwindowdefs_win.h \
+	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/QGridLayout \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/QLabel \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/QMainWindow \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/QPlainTextEdit \
+	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/QScrollBar \
+	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/QSizePolicy \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/QWidget \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qabstractscrollarea.h \
+	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qabstractslider.h \
+	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qboxlayout.h \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qframe.h \
+	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qgridlayout.h \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qlabel.h \
+	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qlayout.h \
+	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qlayoutitem.h \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qmainwindow.h \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qplaintextedit.h \
+	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qscrollbar.h \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qsizepolicy.h \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qtabwidget.h \
 	D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/qtextedit.h \

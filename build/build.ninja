@@ -45,7 +45,7 @@ cmake_ninja_workdir = D$:/works/prjs/pro/tty-dash/build/
 build cmake_object_order_depends_target_TtyDashboard: phony || TtyDashboard_autogen TtyDashboard_autogen/3YJK5W5UP7/qrc_resources.cpp TtyDashboard_autogen/mocs_compilation.cpp TtyDashboard_autogen/timestamp TtyDashboard_autogen_timestamp_deps
 
 build CMakeFiles/TtyDashboard.dir/TtyDashboard_autogen/mocs_compilation.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\TtyDashboard_autogen\mocs_compilation.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -53,8 +53,17 @@ build CMakeFiles/TtyDashboard.dir/TtyDashboard_autogen/mocs_compilation.cpp.obj:
   OBJECT_FILE_DIR = CMakeFiles\TtyDashboard.dir\TtyDashboard_autogen
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
+build CMakeFiles/TtyDashboard.dir/src/widgets/live/LiveWindowsWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/live/LiveWindowsWidget.cpp || cmake_object_order_depends_target_TtyDashboard
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\live\LiveWindowsWidget.cpp.obj.d
+  FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
+  OBJECT_DIR = CMakeFiles\TtyDashboard.dir
+  OBJECT_FILE_DIR = CMakeFiles\TtyDashboard.dir\src\widgets\live
+  TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
+
 build CMakeFiles/TtyDashboard.dir/src/widgets/launch/QuickLaunchWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/launch/QuickLaunchWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\launch\QuickLaunchWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -63,7 +72,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/launch/QuickLaunchWidget.cpp.obj: 
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/main.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/main.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\main.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -72,7 +81,7 @@ build CMakeFiles/TtyDashboard.dir/src/main.cpp.obj: CXX_COMPILER__TtyDashboard_u
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/app/AppController.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/app/AppController.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\app\AppController.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -81,7 +90,7 @@ build CMakeFiles/TtyDashboard.dir/src/app/AppController.cpp.obj: CXX_COMPILER__T
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/config/ConfigManager.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/config/ConfigManager.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\config\ConfigManager.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -90,7 +99,7 @@ build CMakeFiles/TtyDashboard.dir/src/config/ConfigManager.cpp.obj: CXX_COMPILER
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/display/DisplayManager.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/display/DisplayManager.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\display\DisplayManager.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -99,7 +108,7 @@ build CMakeFiles/TtyDashboard.dir/src/display/DisplayManager.cpp.obj: CXX_COMPIL
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/hotkeys/HotkeyManager.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/hotkeys/HotkeyManager.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\hotkeys\HotkeyManager.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -108,7 +117,7 @@ build CMakeFiles/TtyDashboard.dir/src/hotkeys/HotkeyManager.cpp.obj: CXX_COMPILE
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/layout/LayoutManager.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/layout/LayoutManager.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\layout\LayoutManager.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -117,7 +126,7 @@ build CMakeFiles/TtyDashboard.dir/src/layout/LayoutManager.cpp.obj: CXX_COMPILER
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/services/SystemMonitor.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/services/SystemMonitor.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\services\SystemMonitor.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -126,7 +135,7 @@ build CMakeFiles/TtyDashboard.dir/src/services/SystemMonitor.cpp.obj: CXX_COMPIL
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/TerBonController.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/TerBonController.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\TerBonController.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -135,7 +144,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/TerBonController.cpp.obj: CXX_COMPI
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/TerBonWindow.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/TerBonWindow.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\TerBonWindow.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -144,7 +153,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/TerBonWindow.cpp.obj: CXX_COMPILER_
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/ui/TerminalWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/ui/TerminalWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\ui\TerminalWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -153,7 +162,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/ui/TerminalWidget.cpp.obj: CXX_COMP
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/ui/StatusBar.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/ui/StatusBar.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\ui\StatusBar.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -162,7 +171,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/ui/StatusBar.cpp.obj: CXX_COMPILER_
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/ui/themes/Colors.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/ui/themes/Colors.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\ui\themes\Colors.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -171,7 +180,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/ui/themes/Colors.cpp.obj: CXX_COMPI
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/ui/themes/Interface.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/ui/themes/Interface.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\ui\themes\Interface.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -180,7 +189,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/ui/themes/Interface.cpp.obj: CXX_CO
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/pas/Command.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/pas/Command.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\pas\Command.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -189,7 +198,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/pas/Command.cpp.obj: CXX_COMPILER__
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/pas/Sys.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/pas/Sys.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\pas\Sys.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -198,7 +207,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/pas/Sys.cpp.obj: CXX_COMPILER__TtyD
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/str/AnalizeStr.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/str/AnalizeStr.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\str\AnalizeStr.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -207,7 +216,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/str/AnalizeStr.cpp.obj: CXX_COMPILE
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/str/AnalyzePath.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/str/AnalyzePath.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\str\AnalyzePath.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -216,7 +225,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/str/AnalyzePath.cpp.obj: CXX_COMPIL
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/terbon/str/clangCode.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/terbon/str/clangCode.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\terbon\str\clangCode.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -225,7 +234,7 @@ build CMakeFiles/TtyDashboard.dir/src/terbon/str/clangCode.cpp.obj: CXX_COMPILER
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/utils/Logger.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/utils/Logger.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\utils\Logger.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -234,7 +243,7 @@ build CMakeFiles/TtyDashboard.dir/src/utils/Logger.cpp.obj: CXX_COMPILER__TtyDas
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/widgets/DashboardWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/DashboardWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\DashboardWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -243,7 +252,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/DashboardWidget.cpp.obj: CXX_COMPI
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/widgets/WidgetManager.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/WidgetManager.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\WidgetManager.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -252,7 +261,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/WidgetManager.cpp.obj: CXX_COMPILE
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/widgets/ascii/MatrixWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/ascii/MatrixWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\ascii\MatrixWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -261,7 +270,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/ascii/MatrixWidget.cpp.obj: CXX_CO
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/widgets/ascii/PipesWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/ascii/PipesWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\ascii\PipesWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -270,7 +279,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/ascii/PipesWidget.cpp.obj: CXX_COM
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/widgets/clock/ClockWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/clock/ClockWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\clock\ClockWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -279,7 +288,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/clock/ClockWidget.cpp.obj: CXX_COM
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/widgets/system/CpuWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/system/CpuWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\system\CpuWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -288,7 +297,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/system/CpuWidget.cpp.obj: CXX_COMP
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/widgets/system/RamWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/system/RamWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\system\RamWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -297,7 +306,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/system/RamWidget.cpp.obj: CXX_COMP
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/widgets/system/NetworkWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/system/NetworkWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\system\NetworkWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -306,7 +315,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/system/NetworkWidget.cpp.obj: CXX_
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/widgets/system/DiskWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/system/DiskWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\system\DiskWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -315,7 +324,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/system/DiskWidget.cpp.obj: CXX_COM
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/widgets/system/AudioVisualizerWidget.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/widgets/system/AudioVisualizerWidget.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\widgets\system\AudioVisualizerWidget.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -324,7 +333,7 @@ build CMakeFiles/TtyDashboard.dir/src/widgets/system/AudioVisualizerWidget.cpp.o
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/window/DashboardWindow.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/window/DashboardWindow.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\window\DashboardWindow.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -333,7 +342,7 @@ build CMakeFiles/TtyDashboard.dir/src/window/DashboardWindow.cpp.obj: CXX_COMPIL
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/src/window/WindowEffects.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/src/window/WindowEffects.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\src\window\WindowEffects.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -342,7 +351,7 @@ build CMakeFiles/TtyDashboard.dir/src/window/WindowEffects.cpp.obj: CXX_COMPILER
   TARGET_SUPPORT_DIR = CMakeFiles\TtyDashboard.dir
 
 build CMakeFiles/TtyDashboard.dir/TtyDashboard_autogen/3YJK5W5UP7/qrc_resources.cpp.obj: CXX_COMPILER__TtyDashboard_unscanned_ D$:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/3YJK5W5UP7/qrc_resources.cpp || cmake_object_order_depends_target_TtyDashboard
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DNOMINMAX -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN32_LEAN_AND_MEAN -DWIN64 -DWINVER=0x0A00 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0A00 -D_WIN64
   DEP_FILE = CMakeFiles\TtyDashboard.dir\TtyDashboard_autogen\3YJK5W5UP7\qrc_resources.cpp.obj.d
   FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/include -ID:/works/prjs/pro/tty-dash/include -ID:/works/prjs/pro/tty-dash/include/terbon -isystem D:/works/tools/msys2/mingw64/include/qt6/QtCore -isystem D:/works/tools/msys2/mingw64/include/qt6 -isystem D:/works/tools/msys2/mingw64/share/qt6/mkspecs/win32-g++ -isystem D:/works/tools/msys2/mingw64/include/qt6/QtGui -isystem D:/works/tools/msys2/mingw64/include/qt6/QtWidgets
@@ -358,8 +367,9 @@ build CMakeFiles/TtyDashboard.dir/TtyDashboard_autogen/3YJK5W5UP7/qrc_resources.
 #############################################
 # Link the executable tty-dashboard.exe
 
-build tty-dashboard.exe: CXX_EXECUTABLE_LINKER__TtyDashboard_ CMakeFiles/TtyDashboard.dir/TtyDashboard_autogen/mocs_compilation.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/launch/QuickLaunchWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/main.cpp.obj CMakeFiles/TtyDashboard.dir/src/app/AppController.cpp.obj CMakeFiles/TtyDashboard.dir/src/config/ConfigManager.cpp.obj CMakeFiles/TtyDashboard.dir/src/display/DisplayManager.cpp.obj CMakeFiles/TtyDashboard.dir/src/hotkeys/HotkeyManager.cpp.obj CMakeFiles/TtyDashboard.dir/src/layout/LayoutManager.cpp.obj CMakeFiles/TtyDashboard.dir/src/services/SystemMonitor.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/TerBonController.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/TerBonWindow.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/ui/TerminalWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/ui/StatusBar.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/ui/themes/Colors.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/ui/themes/Interface.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/pas/Command.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/pas/Sys.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/str/AnalizeStr.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/str/AnalyzePath.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/str/clangCode.cpp.obj CMakeFiles/TtyDashboard.dir/src/utils/Logger.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/DashboardWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/WidgetManager.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/ascii/MatrixWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/ascii/PipesWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/clock/ClockWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/system/CpuWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/system/RamWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/system/NetworkWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/system/DiskWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/system/AudioVisualizerWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/window/DashboardWindow.cpp.obj CMakeFiles/TtyDashboard.dir/src/window/WindowEffects.cpp.obj CMakeFiles/TtyDashboard.dir/TtyDashboard_autogen/3YJK5W5UP7/qrc_resources.cpp.obj | D$:/works/tools/msys2/mingw64/lib/libQt6Widgets.dll.a D$:/works/tools/msys2/mingw64/lib/libQt6Gui.dll.a D$:/works/tools/msys2/mingw64/lib/libQt6Core.dll.a || TtyDashboard_autogen TtyDashboard_autogen_timestamp_deps
-  LINK_LIBRARIES = D:/works/tools/msys2/mingw64/lib/libQt6Widgets.dll.a  -ldwmapi  -liphlpapi  -luser32  -lole32  -luuid  D:/works/tools/msys2/mingw64/lib/libQt6Gui.dll.a  D:/works/tools/msys2/mingw64/lib/libQt6Core.dll.a  -lmpr  -luserenv  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+build tty-dashboard.exe: CXX_EXECUTABLE_LINKER__TtyDashboard_ CMakeFiles/TtyDashboard.dir/TtyDashboard_autogen/mocs_compilation.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/live/LiveWindowsWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/launch/QuickLaunchWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/main.cpp.obj CMakeFiles/TtyDashboard.dir/src/app/AppController.cpp.obj CMakeFiles/TtyDashboard.dir/src/config/ConfigManager.cpp.obj CMakeFiles/TtyDashboard.dir/src/display/DisplayManager.cpp.obj CMakeFiles/TtyDashboard.dir/src/hotkeys/HotkeyManager.cpp.obj CMakeFiles/TtyDashboard.dir/src/layout/LayoutManager.cpp.obj CMakeFiles/TtyDashboard.dir/src/services/SystemMonitor.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/TerBonController.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/TerBonWindow.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/ui/TerminalWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/ui/StatusBar.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/ui/themes/Colors.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/ui/themes/Interface.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/pas/Command.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/pas/Sys.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/str/AnalizeStr.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/str/AnalyzePath.cpp.obj CMakeFiles/TtyDashboard.dir/src/terbon/str/clangCode.cpp.obj CMakeFiles/TtyDashboard.dir/src/utils/Logger.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/DashboardWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/WidgetManager.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/ascii/MatrixWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/ascii/PipesWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/clock/ClockWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/system/CpuWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/system/RamWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/system/NetworkWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/system/DiskWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/widgets/system/AudioVisualizerWidget.cpp.obj CMakeFiles/TtyDashboard.dir/src/window/DashboardWindow.cpp.obj CMakeFiles/TtyDashboard.dir/src/window/WindowEffects.cpp.obj CMakeFiles/TtyDashboard.dir/TtyDashboard_autogen/3YJK5W5UP7/qrc_resources.cpp.obj | D$:/works/tools/msys2/mingw64/lib/libQt6Widgets.dll.a D$:/works/tools/msys2/mingw64/lib/libQt6Gui.dll.a D$:/works/tools/msys2/mingw64/lib/libQt6Core.dll.a D$:/works/tools/msys2/mingw64/lib/libQt6EntryPoint.a || TtyDashboard_autogen TtyDashboard_autogen_timestamp_deps
+  LINK_FLAGS = -mwindows
+  LINK_LIBRARIES = D:/works/tools/msys2/mingw64/lib/libQt6Widgets.dll.a  -ldwmapi  -liphlpapi  -luser32  -lole32  -luuid  D:/works/tools/msys2/mingw64/lib/libQt6Gui.dll.a  D:/works/tools/msys2/mingw64/lib/libQt6Core.dll.a  -lmpr  -luserenv  -lmingw32  D:/works/tools/msys2/mingw64/lib/libQt6EntryPoint.a  -lshell32  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\TtyDashboard.dir
   POST_BUILD = C:\Windows\system32\cmd.exe /C "cd /D D:\works\prjs\pro\tty-dash\build && D:\works\tools\msys2\mingw64\bin\cmake.exe -E make_directory D:/works/prjs/pro/tty-dash/build/configs && D:\works\tools\msys2\mingw64\bin\cmake.exe -E copy_if_different D:/works/prjs/pro/tty-dash/configs/commands.json D:/works/prjs/pro/tty-dash/build/configs/commands.json && D:\works\tools\msys2\mingw64\bin\cmake.exe -E copy_if_different D:/works/prjs/pro/tty-dash/resources/terbon/clang-format D:/works/prjs/pro/tty-dash/build/.clang-format"
   PRE_LINK = cd .
