@@ -13,6 +13,11 @@
 #include <QScreen>
 #include <QStyle>
 #include <QSystemTrayIcon>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QProcess>
+#include <QStandardPaths>
+#include <QProcess>
 
 namespace ttydash {
 
@@ -116,6 +121,97 @@ void AppController::_rebuild_dashboards() {
         assigned_screens.insert(screen , true);
 
         DashboardWindow *window = new DashboardWindow(display , _config , screen , _layout_manager , _widget_manager , &_system_monitor);
+        
+        QObject::connect(
+            window,
+            &DashboardWindow::terbon_toggle_requested,
+            &_application,
+            [this]() {
+                if (_terbon_controller) {
+                    _terbon_controller->_toggle_visibility();
+                }
+            }
+        );
+
+        QObject::connect(
+            window,
+            &DashboardWindow::browser_open_requested,
+            &_application,
+            [this]() {
+                if (!QDesktopServices::openUrl(QUrl(QStringLiteral("https://github.com/DGBao7")))) {
+                    Logger::_warning(QStringLiteral("Could not open the default browser"));
+                }
+            }
+        );
+
+        QObject::connect(
+            window,
+            &DashboardWindow::vscode_open_requested,
+            &_application,
+            [this]() {
+                const QString executable = QStandardPaths::findExecutable(
+                    QStringLiteral("code")
+                );
+
+                if (executable.isEmpty()) {
+                    Logger::_warning(QStringLiteral("VS Code was not found in PATH"));
+
+                    return;
+                }
+
+                if (!QProcess::startDetached(executable , QStringList{})) {
+                    Logger::_warning(QStringLiteral("Could not launch VS Code"));
+
+                    return;
+                }
+
+                Logger::_info(QStringLiteral("VS Code launched"));
+            }
+        );
+
+        QObject::connect(
+            window,
+            &DashboardWindow::explorer_open_requested,
+            &_application,
+            [this]() {
+                if (!QProcess::startDetached(
+                    QStringLiteral("explorer.exe"),
+                    QStringList{}
+                )) {
+                    Logger::_warning(QStringLiteral("Could not launch File Explorer"));
+
+                    return;
+                }
+
+                Logger::_info(QStringLiteral("File Explorer launched"));
+            }
+        );
+
+        QObject::connect(
+            window,
+            &DashboardWindow::github_desktop_open_requested,
+            &_application,
+            [this]() {
+                const QString executable = QStandardPaths::findExecutable(
+                    QStringLiteral("github")
+                );
+
+                if (executable.isEmpty()) {
+                    Logger::_warning(QStringLiteral("GitHub Desktop was not found in PATH"));
+
+                    return;
+                }
+
+                if (!QProcess::startDetached(executable , QStringList{})) {
+                    Logger::_warning(QStringLiteral("Could not launch GitHub Desktop"));
+
+                    return;
+                }
+
+                Logger::_info(QStringLiteral("GitHub Desktop launched"));
+            }
+        );
+
         QObject::connect(window , &DashboardWindow::widget_geometry_changed , &_application , [this](const QString &display_name , const QString &widget_id , const QRect &geometry) {
             if (!_config_manager._update_widget_geometry(display_name , widget_id , geometry)) {
                 Logger::_warning(QStringLiteral("Could not persist widget position for %1").arg(widget_id));

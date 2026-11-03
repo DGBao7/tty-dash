@@ -44,7 +44,12 @@ template <> constexpr inline auto ttydash::DashboardWindow::qt_create_metaobject
         "display_name",
         "widget_id",
         "QRect",
-        "geometry"
+        "geometry",
+        "terbon_toggle_requested",
+        "browser_open_requested",
+        "vscode_open_requested",
+        "explorer_open_requested",
+        "github_desktop_open_requested"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -52,6 +57,16 @@ template <> constexpr inline auto ttydash::DashboardWindow::qt_create_metaobject
         QtMocHelpers::SignalData<void(const QString &, const QString &, const QRect &)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 3 }, { QMetaType::QString, 4 }, { 0x80000000 | 5, 6 },
         }}),
+        // Signal 'terbon_toggle_requested'
+        QtMocHelpers::SignalData<void()>(7, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'browser_open_requested'
+        QtMocHelpers::SignalData<void()>(8, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'vscode_open_requested'
+        QtMocHelpers::SignalData<void()>(9, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'explorer_open_requested'
+        QtMocHelpers::SignalData<void()>(10, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'github_desktop_open_requested'
+        QtMocHelpers::SignalData<void()>(11, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -76,11 +91,26 @@ void ttydash::DashboardWindow::qt_static_metacall(QObject *_o, QMetaObject::Call
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->widget_geometry_changed((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<QRect>>(_a[3]))); break;
+        case 1: _t->terbon_toggle_requested(); break;
+        case 2: _t->browser_open_requested(); break;
+        case 3: _t->vscode_open_requested(); break;
+        case 4: _t->explorer_open_requested(); break;
+        case 5: _t->github_desktop_open_requested(); break;
         default: ;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
         if (QtMocHelpers::indexOfMethod<void (DashboardWindow::*)(const QString & , const QString & , const QRect & )>(_a, &DashboardWindow::widget_geometry_changed, 0))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (DashboardWindow::*)()>(_a, &DashboardWindow::terbon_toggle_requested, 1))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (DashboardWindow::*)()>(_a, &DashboardWindow::browser_open_requested, 2))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (DashboardWindow::*)()>(_a, &DashboardWindow::vscode_open_requested, 3))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (DashboardWindow::*)()>(_a, &DashboardWindow::explorer_open_requested, 4))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (DashboardWindow::*)()>(_a, &DashboardWindow::github_desktop_open_requested, 5))
             return;
     }
 }
@@ -104,14 +134,14 @@ int ttydash::DashboardWindow::qt_metacall(QMetaObject::Call _c, int _id, void **
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 6;
     }
     return _id;
 }
@@ -120,5 +150,35 @@ int ttydash::DashboardWindow::qt_metacall(QMetaObject::Call _c, int _id, void **
 void ttydash::DashboardWindow::widget_geometry_changed(const QString & _t1, const QString & _t2, const QRect & _t3)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 0, nullptr, _t1, _t2, _t3);
+}
+
+// SIGNAL 1
+void ttydash::DashboardWindow::terbon_toggle_requested()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
+void ttydash::DashboardWindow::browser_open_requested()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
+}
+
+// SIGNAL 3
+void ttydash::DashboardWindow::vscode_open_requested()
+{
+    QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
+}
+
+// SIGNAL 4
+void ttydash::DashboardWindow::explorer_open_requested()
+{
+    QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
+}
+
+// SIGNAL 5
+void ttydash::DashboardWindow::github_desktop_open_requested()
+{
+    QMetaObject::activate(this, &staticMetaObject, 5, nullptr);
 }
 QT_WARNING_POP

@@ -269,6 +269,7 @@
 		"D:/works/tools/msys2/mingw64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets-relwithdebinfo.cmake",
 		"D:/works/tools/msys2/mingw64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginAdditionalTargetInfo.cmake",
 		"D:/works/tools/msys2/mingw64/lib/cmake/Qt6Widgets/Qt6WidgetsVersionlessAliasTargets.cmake",
+		"D:/works/prjs/pro/tty-dash/configs/dashboard.json",
 		"D:/works/prjs/pro/tty-dash/resources/resources.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "D:/works/prjs/pro/tty-dash",

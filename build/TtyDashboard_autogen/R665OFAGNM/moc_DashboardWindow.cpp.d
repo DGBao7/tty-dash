@@ -1,6 +1,8 @@
 D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/R665OFAGNM/moc_DashboardWindow.cpp: D:/works/prjs/pro/tty-dash/include/window/DashboardWindow.h \
   D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/moc_predefs.h \
   D:/works/prjs/pro/tty-dash/include/config/ConfigManager.h \
+  D:/works/prjs/pro/tty-dash/include/widgets/DashboardWidget.h \
+  D:/works/prjs/pro/tty-dash/include/widgets/launch/QuickLaunchWidget.h \
   D:/works/prjs/pro/tty-dash/include/window/WindowEffects.h \
   D:/works/tools/msys2/mingw64/include/_mingw.h \
   D:/works/tools/msys2/mingw64/include/_mingw_locale.h \
@@ -286,9 +288,14 @@ D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/R665OFAGNM/moc_DashboardWi
   D:/works/tools/msys2/mingw64/include/pthread_signal.h \
   D:/works/tools/msys2/mingw64/include/pthread_time.h \
   D:/works/tools/msys2/mingw64/include/pthread_unistd.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/QCoreApplication \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/QJsonObject \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/QList \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/QMargins \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/QObject \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/QRect \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/QSize \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/QSizeF \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/QString \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/QVector \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/q17memory.h \
@@ -300,6 +307,7 @@ D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/R665OFAGNM/moc_DashboardWi
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/q20utility.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/q23type_traits.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/q23utility.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/qabstracteventdispatcher.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qalgorithms.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qalloc.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qanystringview.h \
@@ -310,6 +318,7 @@ D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/R665OFAGNM/moc_DashboardWi
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qatomic.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qatomic_cxx11.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qbasicatomic.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/qbasictimer.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qbindingstorage.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qbitarray.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qbytearray.h \
@@ -331,11 +340,16 @@ D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/R665OFAGNM/moc_DashboardWi
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qcontainerinfo.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qcontainertools_impl.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qcontiguouscache.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/qcoreapplication.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/qcoreapplication_platform.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/qcoreevent.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qdarwinhelpers.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qdatastream.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qdatetime.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/qdeadlinetimer.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qdebug.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qendian.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/qeventloop.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qexceptionhandling.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qflags.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qfloat16.h \
@@ -347,6 +361,7 @@ D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/R665OFAGNM/moc_DashboardWi
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qglobalstatic.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qhash.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qhashfunctions.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/qiodevice.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qiodevicebase.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qiterable.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qiterator.h \
@@ -367,6 +382,7 @@ D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/R665OFAGNM/moc_DashboardWi
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qmetatype.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qminmax.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qnamespace.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtCore/qnativeinterface.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qnumeric.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qobject.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qobject_impl.h \
@@ -434,30 +450,46 @@ D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/R665OFAGNM/moc_DashboardWi
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qxptype_traits.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtCore/qyieldcpu.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/QColor \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/QFont \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/QFontDatabase \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/QPaintEvent \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/QTransform \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qaction.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qbitmap.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qbrush.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qcolor.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qcursor.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qevent.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qeventpoint.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qfont.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qfontdatabase.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qfontinfo.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qfontmetrics.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qfontvariableaxis.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qguiapplication.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qguiapplication_platform.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qicon.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qimage.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qinputdevice.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qinputmethod.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qkeysequence.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qpaintdevice.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qpalette.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qpixelformat.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qpixmap.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qpointingdevice.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qpolygon.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qregion.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qrgb.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qrgba64.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qscreen.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qscreen_platform.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qtgui-config.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qtguiexports.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qtguiglobal.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qtransform.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qvector2d.h \
+  D:/works/tools/msys2/mingw64/include/qt6/QtGui/qvectornd.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qwindowdefs.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtGui/qwindowdefs_win.h \
   D:/works/tools/msys2/mingw64/include/qt6/QtWidgets/QWidget \

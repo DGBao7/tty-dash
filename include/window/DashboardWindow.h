@@ -1,7 +1,10 @@
 #pragma once
 
 #include "config/ConfigManager.h"
+
 #include "window/WindowEffects.h"
+
+#include "widgets/launch/QuickLaunchWidget.h"
 
 #include <QWidget>
 
@@ -26,6 +29,11 @@ public:
 
 signals:
     void widget_geometry_changed(const QString &display_name , const QString &widget_id , const QRect &geometry);
+    void terbon_toggle_requested();
+    void browser_open_requested();
+    void vscode_open_requested();
+    void explorer_open_requested();
+    void github_desktop_open_requested();
 
 protected:
     void showEvent(QShowEvent *event) override;

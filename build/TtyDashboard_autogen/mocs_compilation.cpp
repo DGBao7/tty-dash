@@ -7,4 +7,5 @@
 #include "YHV6M2A3I4/moc_StatusBar.cpp"
 #include "YHV6M2A3I4/moc_TerminalWidget.cpp"
 #include "MROXUFLNXW/moc_DashboardWidget.cpp"
+#include "FUZ6UHYFRD/moc_QuickLaunchWidget.cpp"
 #include "R665OFAGNM/moc_DashboardWindow.cpp"

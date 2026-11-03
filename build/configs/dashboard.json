@@ -1,0 +1,252 @@
+{
+    "application": {
+        "always_on_top": false,
+        "click_through": false,
+        "monitoring_interval_ms": 1500,
+        "opacity": 1
+    },
+    "displays": [
+        {
+            "height": 0,
+            "margins": {
+                "bottom": 0,
+                "left": 0,
+                "right": 0,
+                "top": 0
+            },
+            "name": "primary",
+            "position_mode": "top_left",
+            "widgets": [
+                {
+                    "enabled": true,
+                    "id": "clock",
+                    "options": {
+                        "date_format": "dddd, dd MMMM yyyy",
+                        "display_font_size": 48,
+                        "time_format": "HH:mm:ss"
+                    },
+                    "position": {
+                        "margins": {
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "mode": "adaptive_right",
+                        "x": 0,
+                        "y": 0
+                    },
+                    "size": {
+                        "height": 145,
+                        "width": 290
+                    },
+                    "type": "clock"
+                },
+                {
+                    "enabled": true,
+                    "id": "cpu",
+                    "options": {
+                        "show_graph": true
+                    },
+                    "position": {
+                        "margins": {
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "mode": "adaptive_right",
+                        "x": 0,
+                        "y": 0
+                    },
+                    "size": {
+                        "height": 112,
+                        "width": 290
+                    },
+                    "type": "cpu"
+                },
+                {
+                    "enabled": true,
+                    "id": "ram",
+                    "options": {
+                        "show_graph": true
+                    },
+                    "position": {
+                        "margins": {
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "mode": "adaptive_right",
+                        "x": 0,
+                        "y": 0
+                    },
+                    "size": {
+                        "height": 112,
+                        "width": 290
+                    },
+                    "type": "ram"
+                },
+                {
+                    "enabled": true,
+                    "id": "network",
+                    "options": {
+                        "speed_unit": "auto"
+                    },
+                    "position": {
+                        "margins": {
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "mode": "adaptive_right",
+                        "x": 0,
+                        "y": 0
+                    },
+                    "size": {
+                        "height": 112,
+                        "width": 290
+                    },
+                    "type": "network"
+                },
+                {
+                    "enabled": true,
+                    "id": "disk",
+                    "options": {
+                    },
+                    "position": {
+                        "margins": {
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "mode": "adaptive_right",
+                        "x": 0,
+                        "y": 0
+                    },
+                    "size": {
+                        "height": 112,
+                        "width": 290
+                    },
+                    "type": "disk"
+                },
+                {
+                    "enabled": true,
+                    "id": "matrix",
+                    "options": {
+                        "animation_speed": 1,
+                        "density": 2.4,
+                        "interval_ms": 75
+                    },
+                    "position": {
+                        "margins": {
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "mode": "adaptive_right",
+                        "x": 0,
+                        "y": 0
+                    },
+                    "size": {
+                        "height": 145,
+                        "width": 290
+                    },
+                    "type": "matrix"
+                },
+                {
+                    "enabled": true,
+                    "id": "audio",
+                    "options": {
+                    },
+                    "position": {
+                        "margins": {
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "mode": "adaptive_right",
+                        "x": 0,
+                        "y": 0
+                    },
+                    "size": {
+                        "height": 145,
+                        "width": 290
+                    },
+                    "type": "audio_visualizer"
+                },
+                {
+                    "enabled": true,
+                    "id": "quick-launch",
+                    "options": {
+                    },
+                    "position": {
+                        "margins": {
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "mode": "adaptive_right",
+                        "x": 0,
+                        "y": 0
+                    },
+                    "size": {
+                        "height": 145,
+                        "width": 290
+                    },
+                    "type": "quick_launch"
+                },
+                {
+                    "enabled": true,
+                    "id": "live-windows",
+                    "options": {
+                    },
+                    "position": {
+                        "margins": {
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0,
+                            "top": 0
+                        },
+                        "mode": "adaptive_right",
+                        "x": 0,
+                        "y": 0
+                    },
+                    "size": {
+                        "height": 145,
+                        "width": 290
+                    },
+                    "type": "live_windows"
+                }
+            ],
+            "width": 0,
+            "x": 0,
+            "y": 0
+        }
+    ],
+    "effects": {
+        "backdrop": "none",
+        "background_color": "#00000000",
+        "blur": false
+    },
+    "schema_version": 7,
+    "terbon": {
+        "enabled": true,
+        "has_saved_geometry": true,
+        "height": 350,
+        "initial_working_directory": "D:/",
+        "monitor": "primary",
+        "position": "custom",
+        "remember_geometry": true,
+        "visible_on_startup": false,
+        "width": 700,
+        "x": 539,
+        "y": 118
+    }
+}

@@ -1,9 +1,12 @@
 #include "window/DashboardWindow.h"
 
 #include "layout/LayoutManager.h"
+
 #include "utils/Logger.h"
+
 #include "widgets/DashboardWidget.h"
 #include "widgets/WidgetManager.h"
+
 #include "services/SystemMonitor.h"
 
 #include <QScreen>
@@ -122,17 +125,60 @@ void DashboardWindow::_apply_native_styles() {
 
 void DashboardWindow::_apply_widget_layout(LayoutManager &layout_manager , WidgetManager &widget_manager , SystemMonitor *system_monitor) {
     const QVector<DashboardWidget *> widgets = widget_manager._create_widgets(_display_config.widgets , system_monitor , this);
+
     for (DashboardWidget *widget : widgets) {
+
+        if (auto *quick_launch = qobject_cast<QuickLaunchWidget *>(widget)) {
+            connect(
+                quick_launch,
+                &QuickLaunchWidget::terbon_toggle_requested,
+                this,
+                &DashboardWindow::terbon_toggle_requested
+            );
+
+            connect(
+                quick_launch,
+                &QuickLaunchWidget::browser_open_requested,
+                this,
+                &DashboardWindow::browser_open_requested
+            );
+
+            connect(
+                quick_launch,
+                &QuickLaunchWidget::vscode_open_requested,
+                this,
+                &DashboardWindow::vscode_open_requested
+            );
+
+            connect(
+                quick_launch,
+                &QuickLaunchWidget::explorer_open_requested,
+                this,
+                &DashboardWindow::explorer_open_requested
+            );
+
+            connect(
+                quick_launch,
+                &QuickLaunchWidget::github_desktop_open_requested,
+                this,
+                &DashboardWindow::github_desktop_open_requested
+            );
+        }
+
         const auto config = std::find_if(_display_config.widgets.cbegin() , _display_config.widgets.cend() , [widget](const WidgetConfig &candidate) {
             return candidate.id == widget->_widget_id();
         });
+
         if (config != _display_config.widgets.cend()) {
             widget->setGeometry(layout_manager._widget_geometry(*config , QRect(0 , 0 , width() , height())));
         }
+
         widget->_set_interaction_enabled(false);
+
         connect(widget , &DashboardWidget::geometry_changed , this , [this](const QString &widget_id , const QRect &geometry) {
             emit widget_geometry_changed(_display_name , widget_id , geometry);
         });
+
         widget->show();
     }
 }

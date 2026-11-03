@@ -4,6 +4,7 @@ TtyDashboard_autogen/timestamp: \
 	D:/works/prjs/pro/tty-dash/build/CMakeFiles/4.4.5/CMakeRCCompiler.cmake \
 	D:/works/prjs/pro/tty-dash/build/CMakeFiles/4.4.5/CMakeSystem.cmake \
 	D:/works/prjs/pro/tty-dash/build/TtyDashboard_autogen/moc_predefs.h \
+	D:/works/prjs/pro/tty-dash/configs/dashboard.json \
 	D:/works/prjs/pro/tty-dash/include/app/AppController.h \
 	D:/works/prjs/pro/tty-dash/include/config/ConfigManager.h \
 	D:/works/prjs/pro/tty-dash/include/display/DisplayManager.h \
@@ -527,6 +528,7 @@ TtyDashboard_autogen/timestamp: \
 	D:/works/tools/msys2/mingw64/include/qt6/QtGui/QColor \
 	D:/works/tools/msys2/mingw64/include/qt6/QtGui/QFont \
 	D:/works/tools/msys2/mingw64/include/qt6/QtGui/QFontDatabase \
+	D:/works/tools/msys2/mingw64/include/qt6/QtGui/QPaintEvent \
 	D:/works/tools/msys2/mingw64/include/qt6/QtGui/QScreen \
 	D:/works/tools/msys2/mingw64/include/qt6/QtGui/QTransform \
 	D:/works/tools/msys2/mingw64/include/qt6/QtGui/qabstracttextdocumentlayout.h \

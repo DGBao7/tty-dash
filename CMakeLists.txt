@@ -17,6 +17,14 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Widgets)
 
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/configs")
+
+configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/configs/dashboard.json"
+    "${CMAKE_BINARY_DIR}/configs/dashboard.json"
+    COPYONLY
+)
+
 add_executable(TtyDashboard
     include/app/AppController.h
     include/config/ConfigManager.h
