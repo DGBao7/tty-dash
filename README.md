@@ -4,6 +4,10 @@
 
 TTY Dashboard is a native desktop utility built with **C++20**, **Qt 6**, and the Windows API. It places configurable widgets directly on the desktop and includes **TerBon**, a compact terminal for everyday file and development tasks.
 
+<p align="center">
+  <img src="assets/images/sample.jpg" alt="TTY Dashboard overview">
+</p>
+
 ## Features
 
 ### Desktop Dashboard
